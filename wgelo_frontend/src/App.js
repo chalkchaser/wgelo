@@ -1,5 +1,5 @@
  import './App.css'
-
+ import { useState } from 'react'
 
  const Button = (props) => {
   return (
@@ -11,11 +11,17 @@
 
 
 const PersonTable = ({persons, setSortBy}) =>{
+
+  persons.sort((a, b) => b.elo - a.elo)//sort by higher elo to calculate ranking
+  {persons.map((person, index) => person.rank = index)}// add ranking
+
+
   return(
+
     <table>
       <tc>
         <tr><Button text = "#"/></tr>
-      {persons.map((person, index) => <tr>{index}</tr>)}
+      {persons.map((person, index) => <tr>{person.rank}</tr>)}
       </tc>
       <tc>
         <tr><Button text = "name"/></tr>
@@ -61,6 +67,12 @@ function App() {
         wins: 65,
         losses: 87,
         elo: 1336
+      },
+      {
+        name: 'Sharoka',
+        wins: 133,
+        losses: 155,
+        elo: 1234
       }
     ]
   }
@@ -68,7 +80,7 @@ function App() {
 
   return (
     <div>
-    <PersonTable persons = {data.persons} setSortBy={{setSortBy}}/>
+    <PersonTable persons = {data.persons} setSortBy={setSortBy}/>
     </div>
   );
 }
