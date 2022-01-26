@@ -1,6 +1,41 @@
+ import './App.css'
 
+
+ const Button = (props) => {
+  return (
+    <button onClick={props.onClick}>
+      {props.text}
+    </button>
+  )
+}
+
+
+const PersonTable = ({persons, setSortBy}) =>{
+  return(
+    <table>
+      <tc>
+        <tr><Button text = "#"/></tr>
+      {persons.map((person, index) => <tr>{index}</tr>)}
+      </tc>
+      <tc>
+        <tr><Button text = "name"/></tr>
+      {persons.map(person => <tr>{person.name}</tr>)}
+      </tc>
+      <tc>
+      <tr><Button text = "W/L"/></tr>
+      {persons.map(person => <tr>{person.wins} - {person.losses}</tr>)}
+      </tc>
+      <tc>
+      <tr><Button text = "elo"/></tr>
+      {persons.map(person => <tr> {person.elo}</tr>)}
+      </tc>
+    </table>
+  )
+}
 
 function App() {
+  const [sortBy, setSortBy] = useState('name') 
+
   const data = {
     persons: [
       {
@@ -32,7 +67,9 @@ function App() {
 
 
   return (
-    <div>{data.persons[1].name}</div>
+    <div>
+    <PersonTable persons = {data.persons} setSortBy={{setSortBy}}/>
+    </div>
   );
 }
 
