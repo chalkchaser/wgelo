@@ -10,37 +10,47 @@
 }
 
 
-const PersonTable = ({persons, setSortBy}) =>{
+const PersonTable = ({persons, sortBy, setSortBy}) =>{
 
   persons.sort((a, b) => b.elo - a.elo)//sort by higher elo to calculate ranking
-  {persons.map((person, index) => person.rank = index)}// add ranking
+  {persons.map((person, index) => person.rank = index+1)}// add ranking
+  {persons.map((person) => person.percentage = person.wins/(person.wins + person.losses))}// add ranking
 
+
+  if(sortBy === 'elo'){
+    //do nothing, since sort has already happened
+  }
+
+  if(sortBy === 'name'){
+    persons.sort((a, b) => a.name.localeCompare(b.name))
+    console.log("sort by name")
+  }
+
+  if(sortBy === 'percentage'){
+    persons.sort((a, b) => a.name.localeCompare(b.name))
+    console.log("sort by name")
+  }
 
   return(
 
     <table>
-      <tc>
-        <tr><Button text = "#"/></tr>
-      {persons.map((person, index) => <tr>{person.rank}</tr>)}
-      </tc>
-      <tc>
-        <tr><Button text = "name"/></tr>
-      {persons.map(person => <tr>{person.name}</tr>)}
-      </tc>
-      <tc>
-      <tr><Button text = "W/L"/></tr>
-      {persons.map(person => <tr>{person.wins} - {person.losses}</tr>)}
-      </tc>
-      <tc>
-      <tr><Button text = "elo"/></tr>
-      {persons.map(person => <tr> {person.elo}</tr>)}
-      </tc>
-    </table>
+    <thead><tr><td>#</td><td>name</td><td>W/L(%)</td><td>elo</td></tr>
+</thead>
+<tbody>
+      {persons.map(person =><tr>
+        <td>{person.ranking}</td>
+        <td>{person.name}</td>
+        <td>{person.wins} - {persons.losses}({(person.wins/(person.wins + person.losses)).toFixed(2)})</td>
+        <td>{person.elo}</td>
+        </tr>)}
+    
+</tbody>
+</table>
   )
 }
 
 function App() {
-  const [sortBy, setSortBy] = useState('name') 
+  const [sortBy, setSortBy] = useState('elo') 
 
   const data = {
     persons: [
@@ -80,7 +90,7 @@ function App() {
 
   return (
     <div>
-    <PersonTable persons = {data.persons} setSortBy={setSortBy}/>
+    <PersonTable persons = {data.persons} sortBy={sortBy} setSortBy={setSortBy}/>
     </div>
   );
 }
