@@ -117,6 +117,18 @@ function App() {
         wins: 133,
         losses: 155,
         elo: 1234
+      },
+      {
+        name: 'Don Abrammov',
+        wins: 232,
+        losses: 141,
+        elo: 1422
+      },
+      {
+        name: 'Pudit Jolgar',
+        wins: 522,
+        losses: 232,
+        elo: 2660
       }
     ]
   }

@@ -6,7 +6,7 @@ body {
   }
 #root{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.25fr 2fr 1.25fr;
     grid-template-rows: auto;
 }
 
@@ -14,7 +14,6 @@ body {
 #main{
     grid-column: 2;
     grid-row: 1;
-    margin: auto;
 }
 
 
@@ -33,14 +32,12 @@ body {
 
 
 #personTable{
-    display: inline ;
     border-collapse: collapse;
     border-spacing: 0.5em;
     outline-offset: 15px;
-
+    width: 100%;
     font-size: 2em;
     text-align: center;
-    margin-right: 0%;
 }
 
 #personTable thead td{
@@ -78,6 +75,10 @@ body {
     min-width: 6em; 
     white-space: nowrap;
 }
+#personTable td:nth-child(2){
+    text-align: left;
+}
+
 
 tr:hover td {
     background: rgb(74, 255, 165);
