@@ -1,3 +1,38 @@
 body {
     background-color: #7C4EE0;
   }
+
+
+
+#personTable{
+    
+    background-color: rgb(200, 168, 221);
+    border-collapse: collapse;
+    border-spacing: 0.5em;
+    outline-offset: 15px;
+    margin-left:auto; 
+    margin-right:auto;
+    min: width 50px;
+    font-size: 2em;
+
+}
+#personTable tbody tr:nth-child(odd) td{
+    background:rgb(173, 120, 175);
+}
+
+#personTable td{
+    min-width: 6em; 
+}
+
+th:first-of-type {
+    border-top-left-radius: 10px;
+  }
+  th:last-of-type {
+    border-top-right-radius: 10px;
+  }
+  tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 10px;
+  }
+  tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: 10px;
+  }

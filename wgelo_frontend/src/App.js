@@ -27,20 +27,26 @@ const PersonTable = ({persons, sortBy, setSortBy}) =>{
   }
 
   if(sortBy === 'percentage'){
-    persons.sort((a, b) => a.name.localeCompare(b.name))
+    persons.sort((a, b) => b.percentage - a.percentage)
     console.log("sort by name")
   }
 
   return(
 
-    <table>
-    <thead><tr><td>#</td><td>name</td><td>W/L(%)</td><td>elo</td></tr>
+    <table id='personTable'>
+    <thead>
+      <tr>
+        <td onClick={()=> setSortBy('elo')}>#</td>
+        <td onClick={()=> setSortBy('name')}>name</td>
+        <td onClick={()=> setSortBy('percentage')}>W/L(%)</td>
+        <td onClick={()=> setSortBy('elo')}>elo</td>
+        </tr>
 </thead>
 <tbody>
-      {persons.map(person =><tr>
-        <td>{person.ranking}</td>
+      {persons.map(person =><tr key={person.name}>
+        <td>{person.rank}</td>
         <td>{person.name}</td>
-        <td>{person.wins} - {persons.losses}({(person.wins/(person.wins + person.losses)).toFixed(2)})</td>
+        <td>{person.wins} - {person.losses}({(person.wins/(person.wins + person.losses)).toFixed(2)})</td>
         <td>{person.elo}</td>
         </tr>)}
     
