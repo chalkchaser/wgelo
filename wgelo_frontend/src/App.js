@@ -55,6 +55,17 @@ const PersonTable = ({persons, sortBy, setSortBy}) =>{
   )
 }
 
+const Navigation = () => {
+
+  return(
+    <div id='navigation'>
+      <Button text= "standings"></Button>
+      <Button text= "record Game"></Button>
+      <Button text= "history"onClick={()=>console.log("test history")}></Button>
+    </div>
+  )
+}
+
 function App() {
   const [sortBy, setSortBy] = useState('elo') 
 
@@ -95,7 +106,8 @@ function App() {
 
 
   return (
-    <div>
+    <div id = "main">
+    <Navigation></Navigation>
     <PersonTable persons = {data.persons} sortBy={sortBy} setSortBy={setSortBy}/>
     </div>
   );
