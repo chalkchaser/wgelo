@@ -4,7 +4,7 @@
  const Button = (props) => {
   return (
     <button onClick={props.onClick}>
-      {props.text}
+      <div  className='buttonText'>{props.text}</div> 
     </button>
   )
 }
@@ -59,8 +59,8 @@ const Navigation = ({setNavigate}) => {
 
   return(
     <div id='navigation'>
-      <Button text= "standings" onClick = {() => setNavigate("standings")}></Button>
-      <Button text= "record Game" onClick = {() => setNavigate("record_game")}></Button>
+      <Button class  text= "standings" onClick = {() => setNavigate("standings")}></Button>
+      <Button text= "record game" onClick = {() => setNavigate("record_game")}></Button>
       <Button text= "history" onClick={() => setNavigate("history")}></Button>
     </div>
   )

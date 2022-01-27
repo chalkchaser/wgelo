@@ -24,8 +24,14 @@ body {
     margin-bottom: 1em;
     font-size: 1.8em;
     padding: 0.5em;
-    border-radius: 0.5em;
+    border-radius: 0.25em;
     background: rgb(48, 192, 96);
+    transform: skew(-30deg);
+
+}
+.buttonText{
+    font-size: 0.8em;
+    transform: skew(+30deg);
 
 }
 
@@ -72,8 +78,9 @@ body {
 }
 
 #personTable td{
-    min-width: 6em; 
-    white-space: nowrap;
+    min-width: 4em; 
+    
+    font-size: 0.75em;
 }
 #personTable td:nth-child(2){
     text-align: left;
