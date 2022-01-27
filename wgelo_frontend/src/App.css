@@ -1,38 +1,62 @@
 body {
     background-color: #7C4EE0;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
 
 
 #personTable{
     
-    background-color: rgb(200, 168, 221);
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
     border-collapse: collapse;
     border-spacing: 0.5em;
     outline-offset: 15px;
     margin-left:auto; 
     margin-right:auto;
-    min: width 50px;
     font-size: 2em;
+    text-align: center;
 
 }
-#personTable tbody tr:nth-child(odd) td{
+
+#personTable thead td{
+    background:rgb(191, 166, 207);
+}
+#personTable thead td:nth-child(1){
+    border-top-left-radius: 1em;
+}
+#personTable thead td:hover{
+    background-color: rgb(74, 255, 165);
+}
+
+#personTable thead td:last-child{
+    border-top-right-radius: 1em;
+}
+
+#personTable tbody tr:nth-child(even){
+    background:rgb(191, 166, 207);
+}
+
+
+#personTable tbody tr:nth-child(odd){
     background:rgb(173, 120, 175);
+}
+
+
+#personTable tbody tr:last-child td:nth-child(1){
+    border-bottom-left-radius: 2em;
+}
+#personTable tbody tr:last-child td:last-child{
+    border-bottom-right-radius: 2em;
 }
 
 #personTable td{
     min-width: 6em; 
 }
 
-th:first-of-type {
-    border-top-left-radius: 10px;
-  }
-  th:last-of-type {
-    border-top-right-radius: 10px;
-  }
-  tr:last-of-type td:first-of-type {
-    border-bottom-left-radius: 10px;
-  }
-  tr:last-of-type td:last-of-type {
-    border-bottom-right-radius: 10px;
-  }
+tr:hover td {
+    background: rgb(74, 255, 165);
+}
+
