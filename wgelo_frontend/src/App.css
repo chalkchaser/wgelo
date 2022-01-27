@@ -17,6 +17,7 @@ body {
     margin: auto;
 }
 
+
 #navigation button{
     text-align: center;
     margin-left: 0.5em;
@@ -25,7 +26,7 @@ body {
     font-size: 1.8em;
     padding: 0.5em;
     border-radius: 0.5em;
-    background: rgb(128, 80, 143);
+    background: rgb(48, 192, 96);
 
 }
 
@@ -75,6 +76,7 @@ body {
 
 #personTable td{
     min-width: 6em; 
+    white-space: nowrap;
 }
 
 tr:hover td {

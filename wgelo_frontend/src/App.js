@@ -55,18 +55,35 @@ const PersonTable = ({persons, sortBy, setSortBy}) =>{
   )
 }
 
-const Navigation = () => {
+const Navigation = ({setNavigate}) => {
 
   return(
     <div id='navigation'>
-      <Button text= "standings"></Button>
-      <Button text= "record Game"></Button>
-      <Button text= "history"onClick={()=>console.log("test history")}></Button>
+      <Button text= "standings" onClick = {() => setNavigate("standings")}></Button>
+      <Button text= "record Game" onClick = {() => setNavigate("record_game")}></Button>
+      <Button text= "history" onClick={() => setNavigate("history")}></Button>
     </div>
   )
 }
 
+const Display = ({navigate,data, sortBy, setSortBy}) =>{
+  console.log(navigate)
+
+  if(navigate === "standings"){
+    return(
+      <PersonTable persons = {data.persons} sortBy={sortBy} setSortBy={setSortBy}/>
+    )
+ 
+  }
+  else{
+    return(<div></div>)
+  }
+  
+
+}
+
 function App() {
+  const[navigate, setNavigate] = useState('standings')
   const [sortBy, setSortBy] = useState('elo') 
 
   const data = {
@@ -107,8 +124,8 @@ function App() {
 
   return (
     <div id = "main">
-    <Navigation></Navigation>
-    <PersonTable persons = {data.persons} sortBy={sortBy} setSortBy={setSortBy}/>
+    <Navigation setNavigate={setNavigate}></Navigation>
+    <Display navigate = {navigate} data = {data} sortBy={sortBy} setSortBy={setSortBy}></Display>
     </div>
   );
 }
