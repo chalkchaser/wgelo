@@ -4,7 +4,7 @@ body {
     color: rgb(8, 3, 7);
 
   }
-#root{
+#all{
     display: grid;
     grid-template-columns: 1.25fr 2fr 1.25fr;
     grid-template-rows: auto;
@@ -19,22 +19,42 @@ body {
 
 #navigation button{
     text-align: center;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    margin-bottom: 1em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+
     font-size: 1.8em;
     padding: 0.5em;
     border-radius: 0.25em;
     background: rgb(48, 192, 96);
     transform: skew(-30deg);
 
+    
 }
-.buttonText{
+
+#navigation button:hover{
+   background-color: rgb(74, 255, 165);
+}
+#navigation .buttonText{
     font-size: 0.8em;
     transform: skew(+30deg);
 
 }
 
+
+#sideBar{
+    grid-column: 3;
+
+}
+#sideBar button{
+    background:rgb(191, 166, 207);
+    font-size: 1.4em;
+    padding: 0.4em;
+    border-radius: 0.5em;
+    margin-top: 6em;
+    margin-left: 2em;
+}
 
 
 #personTable{
@@ -44,7 +64,10 @@ body {
     width: 100%;
     font-size: 2em;
     text-align: center;
+
 }
+
+
 
 #personTable thead td{
     background:rgb(191, 166, 207);
@@ -78,11 +101,14 @@ body {
 }
 
 #personTable td{
-    min-width: 4em; 
     
     font-size: 0.75em;
 }
 #personTable td:nth-child(2){
+    text-align: left;
+}
+
+#personTable td:nth-child(3){
     text-align: left;
 }
 

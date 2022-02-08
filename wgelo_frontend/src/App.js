@@ -1,5 +1,54 @@
  import './App.css'
- import { useState } from 'react'
+ import { useEffect, useState } from 'react'
+
+
+ const data = {
+  persons: [
+    {
+      name: 'Captain Falakofalako',
+      wins: 62,
+      losses: 49,
+      elo: 1240
+    },
+    {
+      name: 'Carlos Magnussen',
+      wins: 322,
+      losses: 54,
+      elo: 2844
+    },
+    {
+      name: 'Dan Hibiki',
+      wins: 12,
+      losses: 86,
+      elo: 840
+    },
+    {
+      name: 'Hasko Curly',
+      wins: 65,
+      losses: 87,
+      elo: 1336
+    },
+    {
+      name: 'Sharoka',
+      wins: 133,
+      losses: 155,
+      elo: 1234
+    },
+    {
+      name: 'Don Abrammov',
+      wins: 232,
+      losses: 141,
+      elo: 1422
+    },
+    {
+      name: 'Pudit Jolgar',
+      wins: 522,
+      losses: 232,
+      elo: 2660
+    }
+  ]
+}
+
 
  const Button = (props) => {
   return (
@@ -10,11 +59,13 @@
 }
 
 
+
+
 const PersonTable = ({persons, sortBy, setSortBy}) =>{
 
   persons.sort((a, b) => b.elo - a.elo)//sort by higher elo to calculate ranking
-  {persons.map((person, index) => person.rank = index+1)}// add ranking
-  {persons.map((person) => person.percentage = person.wins/(person.wins + person.losses))}// add ranking
+  persons.map((person, index) => person.rank = index+1)// add ranking
+  persons.map((person) => person.percentage = person.wins/(person.wins + person.losses))// add ranking
 
 
   if(sortBy === 'elo'){
@@ -66,12 +117,10 @@ const Navigation = ({setNavigate}) => {
   )
 }
 
-const Display = ({navigate,data, sortBy, setSortBy}) =>{
-  console.log(navigate)
-
+const Display = ({navigate,players, sortBy, setSortBy}) =>{
   if(navigate === "standings"){
     return(
-      <PersonTable persons = {data.persons} sortBy={sortBy} setSortBy={setSortBy}/>
+      <PersonTable persons = {players} sortBy={sortBy} setSortBy={setSortBy}/>
     )
  
   }
@@ -82,63 +131,47 @@ const Display = ({navigate,data, sortBy, setSortBy}) =>{
 
 }
 
+
+
+const PlayerAddButton = ({addPlayer}) => {
+  const testPlayer ={
+    name: 'Test Player',
+    wins: 123,
+    losses: 232,
+    elo: 1452
+  }
+  return(
+    <Button text = "+player" onClick = {(()=> addPlayer(testPlayer))} ></Button>
+    )
+}
+
 function App() {
+  const [players, setPlayers] = useState([])
   const[navigate, setNavigate] = useState('standings')
   const [sortBy, setSortBy] = useState('elo') 
+  
 
-  const data = {
-    persons: [
-      {
-        name: 'Captain Falakofalako',
-        wins: 62,
-        losses: 49,
-        elo: 1240
-      },
-      {
-        name: 'Carlos Magnussen',
-        wins: 322,
-        losses: 54,
-        elo: 2844
-      },
-      {
-        name: 'Dan Hibiki',
-        wins: 12,
-        losses: 86,
-        elo: 840
-      },
-      {
-        name: 'Hasko Curly',
-        wins: 65,
-        losses: 87,
-        elo: 1336
-      },
-      {
-        name: 'Sharoka',
-        wins: 133,
-        losses: 155,
-        elo: 1234
-      },
-      {
-        name: 'Don Abrammov',
-        wins: 232,
-        losses: 141,
-        elo: 1422
-      },
-      {
-        name: 'Pudit Jolgar',
-        wins: 522,
-        losses: 232,
-        elo: 2660
-      }
-    ]
+  const addPlayer = (player) =>{
+    setPlayers(players.concat(player))
   }
+
+ 
+  useEffect(() => { setPlayers(data.persons)},[])
 
 
   return (
+    <div id = "all">
     <div id = "main">
     <Navigation setNavigate={setNavigate}></Navigation>
-    <Display navigate = {navigate} data = {data} sortBy={sortBy} setSortBy={setSortBy}></Display>
+   
+    <Display navigate = {navigate} players = {players} sortBy={sortBy} setSortBy={setSortBy}></Display>
     </div>
+
+      <div id='sideBar'>
+      <PlayerAddButton addPlayer = {addPlayer}/>
+      </div>
+      </div>
+
   );
 }
 
