@@ -133,7 +133,7 @@ const Display = ({navigate,players, sortBy, setSortBy}) =>{
 
 
 
-const PlayerAddButton = ({addPlayer}) => {
+const PlayerAddButton = ({setPlayerform}) => {
   const testPlayer ={
     name: 'Test Player',
     wins: 123,
@@ -141,14 +141,37 @@ const PlayerAddButton = ({addPlayer}) => {
     elo: 1452
   }
   return(
-    <Button text = "+player" onClick = {(()=> addPlayer(testPlayer))} ></Button>
+    <Button text = "+player" onClick = {(()=> setPlayerform(true))} ></Button>
     )
+}
+
+const onSubmit = (e) => {
+  e.preventDefault()
+}
+
+const PlayerAddWindow = ({playerForm}) =>{
+  if(playerForm)
+{
+  return(
+    <form onSubmit={onSubmit}>
+    <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+  )
+}else{
+  return(<></>)
+}
 }
 
 function App() {
   const [players, setPlayers] = useState([])
   const[navigate, setNavigate] = useState('standings')
   const [sortBy, setSortBy] = useState('elo') 
+  const[playerForm,setPlayerform] = useState(false)
+
   
 
   const addPlayer = (player) =>{
@@ -168,7 +191,8 @@ function App() {
     </div>
 
       <div id='sideBar'>
-      <PlayerAddButton addPlayer = {addPlayer}/>
+      <PlayerAddButton setPlayerform={setPlayerform}/>
+      <PlayerAddWindow playerForm = {playerForm}/>
       </div>
       </div>
 
