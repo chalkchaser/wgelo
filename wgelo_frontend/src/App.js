@@ -147,18 +147,27 @@ const PlayerAddButton = ({setPlayerform}) => {
 
 const onSubmit = (e) => {
   e.preventDefault()
+  console.log("submit has been pressed")
 }
 
 const PlayerAddWindow = ({playerForm}) =>{
+
+  const[playerFormContent, setPlayerFromContent] = useState('asdads')
+
+  const handlePlayerFormOnChange = (event) => {
+    console.log(event.target.value)
+    setPlayerFromContent(event.target.value)
+  }
+
   if(playerForm)
 {
   return(
     <form onSubmit={onSubmit}>
     <label>
     Name:
-    <input type="text" name="name" />
+    <input type="text" name="name" value={playerFormContent} onChange={handlePlayerFormOnChange} />
   </label>
-  <input type="submit" value="Submit" />
+  <input type="submit" value= "submit" />
 </form>
   )
 }else{
