@@ -134,18 +134,9 @@ const PlayerAddButton = ({ setPlayerform }) => {
   )
 }
 
-const addCreatedPlayer = (playerFormContent) => (e) => {
-  e.preventDefault()
-  const playerObject = {
-    name: playerFormContent,
-    wins: 0,
-    losses: 0,
-    elo: 1200
-  }
-  console.log(playerObject)
-}
 
-const PlayerAddWindow = ({ playerForm }) => {
+
+const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
 
   const [playerFormContent, setPlayerFromContent] = useState('asdads')
 
@@ -154,9 +145,22 @@ const PlayerAddWindow = ({ playerForm }) => {
     setPlayerFromContent(event.target.value)
   }
 
+  const addCreatedPlayer  = (e) => {
+    e.preventDefault()
+    const playerObject = {
+      name: playerFormContent,
+      wins: 0,
+      losses: 0,
+      elo: 1200
+    }
+    setPlayers(players.concat(playerObject))
+    
+    
+  }
+
   if (playerForm) {
     return (
-      <form onSubmit={addCreatedPlayer(playerFormContent)}>
+      <form onSubmit={addCreatedPlayer}>
         <label>
           Name:
           <input type="text" name="name" value={playerFormContent} onChange={handlePlayerFormOnChange} />
@@ -194,7 +198,7 @@ function App() {
 
       <div id='sideBar'>
         <PlayerAddButton setPlayerform={setPlayerform} />
-        <PlayerAddWindow playerForm={playerForm} />
+        <PlayerAddWindow playerForm={playerForm} players={players} setPlayers = {setPlayers}/>
       </div>
     </div>
 
