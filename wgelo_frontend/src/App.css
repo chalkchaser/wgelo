@@ -54,6 +54,34 @@ body {
     border-radius: 0.5em;
     margin-top: 6em;
     margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+#submit_player{
+    font-size: 1.5em;
+    margin-left: 1em;
+}
+
+#submit_player input[type="text"]
+{
+    width:8em;
+   
+    font-size: 0.8em;
+}
+
+#submit_player label{
+    display: block;
+
+}
+
+
+#submit_player input[type="submit"]{
+    font-size: 0.8em;
+    margin-top: 1em;
+    width: 6em;
+    height: 1.5em;
+    background-color: rgb(74, 255, 165);
+
 }
 
 
@@ -64,6 +92,7 @@ body {
     width: 100%;
     font-size: 2em;
     text-align: center;
+    border-radius: 1em;
 
 }
 
@@ -72,36 +101,37 @@ body {
 #personTable thead td{
     background:rgb(191, 166, 207);
 }
-#personTable thead td:nth-child(1){
+#personTable thead td:first-child{
     border-top-left-radius: 1em;
-}
-#personTable thead td:hover{
-    background-color: rgb(74, 255, 165);
 }
 
 #personTable thead td:last-child{
     border-top-right-radius: 1em;
 }
+#personTable thead td:hover{
+    background-color: rgb(74, 255, 165);
+}
 
-#personTable tbody tr:nth-child(even){
+
+#personTable tbody tr:nth-child(even) td{
     background:rgb(191, 166, 207);
 }
 
 
-#personTable tbody tr:nth-child(odd){
+#personTable tbody tr:nth-child(odd) td{
     background:rgb(173, 120, 175);
 }
 
 
-#personTable tbody tr:last-child td:nth-child(1){
-    border-bottom-left-radius: 2em;
+#personTable tbody tr:last-child td:first-child{
+    border-bottom-left-radius: 1em;
 }
 #personTable tbody tr:last-child td:last-child{
-    border-bottom-right-radius: 2em;
+    border-bottom-right-radius: 1em;
 }
 
 #personTable td{
-    
+    padding: 0.25em;
     font-size: 0.75em;
 }
 #personTable td:nth-child(2){
@@ -113,7 +143,9 @@ body {
 }
 
 
-tr:hover td {
+#personTable tbody tr:hover>td{
     background: rgb(74, 255, 165);
+    background-color: rgb(74, 255, 165);
+
 }
 

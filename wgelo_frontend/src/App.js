@@ -1,5 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const data = {
   persons: [
@@ -160,11 +161,10 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
 
   if (playerForm) {
     return (
-      <form onSubmit={addCreatedPlayer}>
-        <label>
-          Name:
-          <input type="text" name="name" value={playerFormContent} onChange={handlePlayerFormOnChange} />
-        </label>
+      <form id='submit_player' onSubmit={addCreatedPlayer}>
+        <div>
+          <input type="text" name="name" value={playerFormContent} onChange={handlePlayerFormOnChange} placeholder="name" />
+        </div>
         <input type="submit" value="submit" />
       </form>
     )
@@ -183,10 +183,18 @@ function App() {
 
   const addPlayer = (player) => {
     setPlayers(players.concat(player))
-  }
+  } 
 
 
   useEffect(() => { setPlayers(data.persons) }, [])
+
+  useEffect(() => {
+    axios
+    .get('http://localhost:3001/persons')
+    .then(response => {
+      console.log(response)
+
+  })}, [])
 
   return (
     <div id="all">
