@@ -152,11 +152,16 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
       name: playerFormContent,
       wins: 0,
       losses: 0,
-      elo: 1200
+      elo: 1200,
+      id: parseInt(Math.random()*10000)
     }
-    setPlayers(players.concat(playerObject))
     
-    
+    axios
+    .post('http://localhost:3001/persons', playerObject)
+    .then(response => {
+      setPlayers(players.concat(response.data))
+    })
+
   }
 
   if (playerForm) {
@@ -186,13 +191,14 @@ function App() {
   } 
 
 
-  useEffect(() => { setPlayers(data.persons) }, [])
+  //useEffect(() => { setPlayers(data.persons) }, [])
 
   useEffect(() => {
     axios
     .get('http://localhost:3001/persons')
     .then(response => {
-      console.log(response)
+      setPlayers(response.data)
+      console.log(response.data)
 
   })}, [])
 
