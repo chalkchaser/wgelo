@@ -2,52 +2,9 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const data = {
-  persons: [
-    {
-      name: 'Captain Falakofalako',
-      wins: 62,
-      losses: 49,
-      elo: 1240
-    },
-    {
-      name: 'Carlos Magnussen',
-      wins: 322,
-      losses: 54,
-      elo: 2844
-    },
-    {
-      name: 'Dan Hibiki',
-      wins: 12,
-      losses: 86,
-      elo: 840
-    },
-    {
-      name: 'Hasko Curly',
-      wins: 65,
-      losses: 87,
-      elo: 1336
-    },
-    {
-      name: 'Sharoka',
-      wins: 133,
-      losses: 155,
-      elo: 1234
-    },
-    {
-      name: 'Don Abrammov',
-      wins: 232,
-      losses: 141,
-      elo: 1422
-    },
-    {
-      name: 'Pudit Jolgar',
-      wins: 522,
-      losses: 232,
-      elo: 2660
-    }
-  ]
-}
+
+const K_VALUE =32
+
 
 
 const Button = (props) => {
@@ -61,7 +18,7 @@ const Button = (props) => {
 
 const PersonTable = ({ persons, sortBy, setSortBy }) => {
 
-  persons.sort((a, b) => b.elo - a.elo)//sort by higher elo to calculate ranking
+  persons.sort((a, b) => b.elo.at(-1) - a.elo.at(-1))//sort by higher elo to calculate ranking
   persons.map((person, index) => person.rank = index + 1)// add ranking
   persons.map((person) => person.percentage = person.wins / (person.wins + person.losses))// add ranking
 
@@ -95,7 +52,7 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
           <td>{person.rank}</td>
           <td>{person.name}</td>
           <td>{person.wins} - {person.losses}({(person.wins / (person.wins + person.losses)).toFixed(2)})</td>
-          <td>{person.elo}</td>
+          <td>{person.elo.at(-1)}</td>
         </tr>)}
 
       </tbody>
@@ -152,7 +109,7 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
       name: playerFormContent,
       wins: 0,
       losses: 0,
-      elo: 1200,
+      elo: [1200],
       id: parseInt(Math.random()*10000)
     }
     
@@ -160,6 +117,7 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
     .post('http://localhost:3001/persons', playerObject)
     .then(response => {
       setPlayers(players.concat(response.data))
+      console.log(calculateElo(players[0],players[1],1))
     })
 
   }
@@ -178,6 +136,26 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
   }
 }
 
+
+const  matchPlayersEditElo= ({player1, player2, result}) => { // 1 equals win for player 1, 0 equals draw, -1 equals loss
+
+  return null
+}
+
+const calculateElo =(player1, player2, result) =>{
+  const rating_change = K_VALUE*(1-expectedScore(player1, player2))
+  if(result === 1)  {return [player1.elo.at(-1)+ rating_change, player2.elo.at(-1) - rating_change]} //player 1 won
+  else if(result === -1)  {return [player1.elo.at(-1)- rating_change, player2.elo.at(-1) + rating_change] //player 1 lost
+  }
+}
+const expectedScore = (player1, player2) =>{
+  return 1/(1+10**((player2.elo.at(-1)-player1.elo.at(-1))/400))
+
+}
+
+ 
+
+
 function App() {
   const [players, setPlayers] = useState([])
   const [navigate, setNavigate] = useState('standings')
@@ -186,9 +164,6 @@ function App() {
 
 
 
-  const addPlayer = (player) => {
-    setPlayers(players.concat(player))
-  } 
 
 
   //useEffect(() => { setPlayers(data.persons) }, [])
@@ -199,8 +174,10 @@ function App() {
     .then(response => {
       setPlayers(response.data)
       console.log(response.data)
+      
 
   })}, [])
+
 
   return (
     <div id="all">
