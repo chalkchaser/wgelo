@@ -1,10 +1,10 @@
-import './App.css'
+import './style/App.css'
+import PersonTable  from './components/PersonTable'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import PlayerAddWindow from './components/PlayerAddWindow'
 
 const K_VALUE =32
-
 
 
 const Button = (props) => {
@@ -12,51 +12,6 @@ const Button = (props) => {
     <button onClick={props.onClick}>
       <div className='buttonText'>{props.text}</div>
     </button>
-  )
-}
-
-
-const PersonTable = ({ persons, sortBy, setSortBy }) => {
-
-  persons.sort((a, b) => b.elo.at(-1) - a.elo.at(-1))//sort by higher elo to calculate ranking
-  persons.map((person, index) => person.rank = index + 1)// add ranking
-  persons.map((person) => person.percentage = person.wins / (person.wins + person.losses))// add ranking
-
-  if (sortBy === 'elo') {
-    //do nothing, since sort has already happened
-  }
-
-  if (sortBy === 'name') {
-    persons.sort((a, b) => a.name.localeCompare(b.name))
-    console.log("sort by name")
-  }
-
-  if (sortBy === 'percentage') {
-    persons.sort((a, b) => b.percentage - a.percentage)
-    console.log("sort by name")
-  }
-
-  return (
-
-    <table id='personTable'>
-      <thead>
-        <tr>
-          <td onClick={() => setSortBy('elo')}>#</td>
-          <td onClick={() => setSortBy('name')}>name</td>
-          <td onClick={() => setSortBy('percentage')}>W/L(%)</td>
-          <td onClick={() => setSortBy('elo')}>elo</td>
-        </tr>
-      </thead>
-      <tbody>
-        {persons.map(person => <tr key={person.name}>
-          <td>{person.rank}</td>
-          <td>{person.name}</td>
-          <td>{person.wins} - {person.losses}({(person.wins / (person.wins + person.losses)).toFixed(2)})</td>
-          <td>{person.elo.at(-1)}</td>
-        </tr>)}
-
-      </tbody>
-    </table>
   )
 }
 
@@ -70,7 +25,6 @@ const Navigation = ({ setNavigate }) => {
     </div>
   )
 }
-
 
 const Display = ({ navigate, players, sortBy, setSortBy }) => {
   if (navigate === "standings") {
@@ -90,49 +44,6 @@ const PlayerAddButton = ({ setPlayerform }) => {
   return (
     <Button text="+player" onClick={(() => setPlayerform(true))} ></Button>
   )
-}
-
-
-
-const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
-
-  const [playerFormContent, setPlayerFromContent] = useState('asdads')
-
-  const handlePlayerFormOnChange = (event) => {
-    console.log(event.target.value)
-    setPlayerFromContent(event.target.value)
-  }
-
-  const addCreatedPlayer  = (e) => {
-    e.preventDefault()
-    const playerObject = {
-      name: playerFormContent,
-      wins: 0,
-      losses: 0,
-      elo: [1200],
-      id: parseInt(Math.random()*10000)
-    }
-    
-    axios
-    .post('http://localhost:3001/persons', playerObject)
-    .then(response => {
-      setPlayers(players.concat(response.data))
-    })
-
-  }
-
-  if (playerForm) {
-    return (
-      <form id='submit_player' onSubmit={addCreatedPlayer}>
-        <div>
-          <input type="text" name="name" value={playerFormContent} onChange={handlePlayerFormOnChange} placeholder="name" />
-        </div>
-        <input type="submit" value="submit" />
-      </form>
-    )
-  } else {
-    return (<></>)
-  }
 }
 
 
@@ -166,7 +77,6 @@ const MatchConfirmButton = ({setPlayers, players, player1, player2,result}) =>{
   return(<Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,result))}} ></Button>)
 
 }
-
 
 const calculateElo =(elo1, elo2, result) =>{
   const rating_change = K_VALUE*(1-expectedScore(elo1, elo2))
