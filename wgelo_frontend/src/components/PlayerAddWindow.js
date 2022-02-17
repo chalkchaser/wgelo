@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
 
-    const [playerFormContent, setPlayerFromContent] = useState('asdads')
+    const [playerFormContent, setPlayerFromContent] = useState('')
   
     const handlePlayerFormOnChange = (event) => {
       console.log(event.target.value)

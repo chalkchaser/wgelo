@@ -32,12 +32,82 @@ const Display = ({ navigate, players, sortBy, setSortBy }) => {
       <PersonTable persons={players} sortBy={sortBy} setSortBy={setSortBy} />
     )
 
+  }else if(navigate = "record_game"){
+    return(
+      <PlayerMatchup players={players}></PlayerMatchup>
+    )
+  
   }
   else {
     return (<div></div>)
   }
 }
 
+const PlayerMatchup = ({players}) => {
+  const [playerChoiceContent1, setPlayerChoiceContent1] = useState('')
+  const [playerChoiceContent2, setPlayerChoiceContent2] = useState('')
+  const [currentPlayer1, setCurrentPlayer1] = useState()
+  const [currentPlayer2, setCurrentPlayer2] = useState()
+
+
+  const handlePlayerChoiceOnChange1 = (event) => {
+  
+    setPlayerChoiceContent1(event.target.value)
+         
+    if(players.find(player => player.name === event.target.value)){
+      setCurrentPlayer1(players.find(player => player.name === event.target.value))
+    }
+ 
+  }
+
+  
+  const handlePlayerChoiceOnChange2 = (event) => {
+    setPlayerChoiceContent2(event.target.value)
+         
+    if(players.find(player => player.name === event.target.value)){
+      setCurrentPlayer2(players.find(player => player.name === event.target.value))
+    }
+  }
+
+  return( 
+
+   <div>
+    <input list="player-data-list" id="player-choice1" name="player 1" value={playerChoiceContent1} onChange={handlePlayerChoiceOnChange1} />
+    <DataListPLayerNames players ={players}></DataListPLayerNames>
+    <input list="player-data-list" id="player-choice2" name="player 2" value={playerChoiceContent2} onChange={handlePlayerChoiceOnChange2} />
+    <DataListPLayerNames players ={players}></DataListPLayerNames>
+    <PlayerCard player={currentPlayer1} players={players}/>
+    <PlayerCard player={currentPlayer2} players={players}/>
+
+  </div>
+
+  )
+}
+
+const PlayerCard = ({player}) =>{
+  if(player){
+  return(
+    <div class="player-card">
+      <p>{player.name}</p> 
+      <p>{player.elo.at(-1)}</p>
+      </div>
+  )}
+  else{return null}
+
+ 
+  }
+
+const DataListPLayerNames = ({players}) => {   
+
+  return(
+  <datalist id="player-data-list">
+  {      players
+            .map(player => <option value={player.name} key={player.id}/>)}
+  </datalist>
+
+  )
+
+}
 
 const PlayerAddButton = ({ setPlayerform }) => {
 
@@ -67,7 +137,6 @@ const editPlayersMatch =(players,player1,player2,result)=>{
      else if(player2.id === player.id){return new_elos[1]}
      else{return player}
   })
-  console.log(new_players)
   return new_players
 }
 
