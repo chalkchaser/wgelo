@@ -77,8 +77,10 @@ const PlayerMatchup = ({players, setPlayers}) => {
     <DataListPLayerNames players ={players}></DataListPLayerNames>
     <input list="player-data-list" id="player-choice2" name="player 2" value={playerChoiceContent2} onChange={handlePlayerChoiceOnChange2} />
     <DataListPLayerNames players ={players}></DataListPLayerNames>
+    <div id= "player-card-container">
     <PlayerCard player={currentPlayer1} players={players}/>
     <PlayerCard player={currentPlayer2} players={players}/>
+    </div>
     <MatchConfirmButton setPlayers={setPlayers} players={players} player1={currentPlayer1} player2 ={currentPlayer2} result={1}/>
 
 
