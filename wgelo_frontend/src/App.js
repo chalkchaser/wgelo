@@ -6,7 +6,6 @@ import PlayerAddWindow from './components/PlayerAddWindow'
 import  {editPlayersMatch} from './utils/elomath'
 
 
-const K_VALUE =32
 
 
 const Button = (props) => {
@@ -28,15 +27,15 @@ const Navigation = ({ setNavigate }) => {
   )
 }
 
-const Display = ({ navigate, players, sortBy, setSortBy }) => {
+const Display = ({ navigate, players, sortBy, setSortBy, setPlayers }) => {
   if (navigate === "standings") {
     return (
       <PersonTable persons={players} sortBy={sortBy} setSortBy={setSortBy} />
     )
 
-  }else if(navigate = "record_game"){
+  }else if(navigate === "record_game"){
     return(
-      <PlayerMatchup players={players}></PlayerMatchup>
+      <PlayerMatchup players={players} setPlayers={setPlayers}></PlayerMatchup>
     )
   
   }
@@ -80,7 +79,7 @@ const PlayerMatchup = ({players, setPlayers}) => {
     <DataListPLayerNames players ={players}></DataListPLayerNames>
     <PlayerCard player={currentPlayer1} players={players}/>
     <PlayerCard player={currentPlayer2} players={players}/>
-    <MatchConfirmButton setPlayers={setPlayers} players={players} player1={players[0]} player2 ={players[1]} result={1}/>
+    <MatchConfirmButton setPlayers={setPlayers} players={players} player1={currentPlayer1} player2 ={currentPlayer2} result={1}/>
 
 
   </div>
@@ -91,7 +90,7 @@ const PlayerMatchup = ({players, setPlayers}) => {
 const PlayerCard = ({player}) =>{
   if(player){
   return(
-    <div class="player-card">
+    <div className="player-card">
       <p>{player.name}</p> 
       <p>{player.elo.at(-1)}</p>
       </div>
@@ -121,17 +120,16 @@ const PlayerAddButton = ({ setPlayerform }) => {
 }
 
 
-
-
-
-const MatchConfirmButton = ({setPlayers, players, player1, player2,result}) =>{
-
-  return(<Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,result))}} ></Button>)
-
+const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
+  if(player1 &&player2){
+  return(
+  <div><Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,1))}} text="player 1 wins"></Button>
+  <Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,-1))}} text="player 2 wins"></Button>
+  </div>
+  )
+  }else{return null}
 }
 
-
- 
 
 
 function App() {
