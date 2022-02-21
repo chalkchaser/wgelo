@@ -4,16 +4,6 @@
 const K_VALUE =32
 
 
-const editPlayersMatch =(players,player1,player2,result)=>{
-    const new_elos = matchPlayersElo(player1,player2, result)
-  
-    const new_players = players.map(player =>{
-       if( player1.id === player.id) {return new_elos[0]}
-       else if(player2.id === player.id){return new_elos[1]}
-       else{return player}
-    })
-    return new_players
-  }  
 
 const calculateElo =(elo1, elo2, result) =>{
     if(result === 1)  {
@@ -45,4 +35,4 @@ const calculateElo =(elo1, elo2, result) =>{
 
 
 
-export {editPlayersMatch}
+export {matchPlayersElo}

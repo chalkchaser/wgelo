@@ -3,7 +3,7 @@ import PersonTable  from './components/PersonTable'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import PlayerAddWindow from './components/PlayerAddWindow'
-import  {editPlayersMatch} from './utils/elomath'
+import  {matchPlayersElo} from './utils/elomath'
 
 
 
@@ -125,14 +125,32 @@ const PlayerAddButton = ({ setPlayerform }) => {
 const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
   if(player1 &&player2){
   return(
-  <div><Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,1))}} text="player 1 wins"></Button>
-  <Button onClick={()=> {setPlayers(editPlayersMatch(players,player1,player2,-1))}} text="player 2 wins"></Button>
+  <div><Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1)} text="player 1 wins"></Button>
+  <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1)} text="player 2 wins"></Button>
   </div>
   )
   }else{return null}
 }
 
+const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, result) =>{
+  const changed = matchPlayersElo(player1,player2, result)
 
+  setPlayers(players.map(player =>{
+      if( player1.id === player.id) {return changed[0]}
+      else if(player2.id === player.id){return changed[1]}
+      else{return player}
+      }
+    )
+  )
+
+  console.log(changed)
+  axios.put(`http://localhost:3001/persons/${player1.id}`,player1).then(response =>
+  console.log(response)
+  )
+  axios.put(`http://localhost:3001/persons/${player2.id}`,player2).then(response =>
+  console.log(response)
+  )
+}
 
 function App() {
   const [players, setPlayers] = useState([])
