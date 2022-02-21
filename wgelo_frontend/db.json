@@ -1,0 +1,95 @@
+{
+  "persons": [
+    {
+      "name": "Captain Falakofalako",
+      "wins": 62,
+      "losses": 49,
+      "elo": [
+        414,
+        1240
+      ],
+      "id": 12124
+    },
+    {
+      "name": "Carlos Magnussen",
+      "wins": 322,
+      "losses": 54,
+      "elo": [
+        2844
+      ],
+      "id": 2455
+    },
+    {
+      "name": "Dan Hibiki",
+      "wins": 12,
+      "losses": 86,
+      "elo": [
+        840
+      ],
+      "id": 1566
+    },
+    {
+      "name": "Hasko Curly",
+      "wins": 65,
+      "losses": 87,
+      "elo": [
+        1336
+      ],
+      "id": 156654
+    },
+    {
+      "name": "Sharoka",
+      "wins": 133,
+      "losses": 155,
+      "elo": [
+        1234
+      ],
+      "id": 15665
+    },
+    {
+      "name": "Don Abrammov",
+      "wins": 232,
+      "losses": 141,
+      "elo": [
+        1422
+      ],
+      "id": 156633
+    },
+    {
+      "name": "Pudit Jolgar",
+      "wins": 522,
+      "losses": 232,
+      "elo": [
+        2660
+      ],
+      "id": 11444
+    },
+    {
+      "name": "testo",
+      "wins": 0,
+      "losses": 0,
+      "elo": [
+        1200
+      ],
+      "id": 4552
+    },
+    {
+      "name": "hadouken",
+      "wins": 0,
+      "losses": 0,
+      "elo": [
+        1200
+      ],
+      "id": 323
+    },
+    {
+      "name": "hadouken",
+      "wins": 0,
+      "losses": 0,
+      "elo": [
+        1200
+      ],
+      "id": 8034
+    }
+  ]
+}
