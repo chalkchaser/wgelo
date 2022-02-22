@@ -184,6 +184,18 @@ body {
     border-radius: 0.5em;
 }
 
+#win-buttons> :last-child{
+
+    background-color: rgb(189, 164, 185)
+
+}
+
 #win-buttons > *:hover{
     background-color: rgb(74, 255, 165);
+}
+
+#win-buttons> :last-child:hover{
+
+    background-color: rgb(194, 119, 255);
+
 }

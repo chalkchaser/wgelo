@@ -126,8 +126,10 @@ const PlayerAddButton = ({ setPlayerform }) => {
 const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
   if(player1 &&player2){
   return(
-  <div id="win-buttons"><Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1)} text={player1.name + " WINS🏆"}></Button>
-  <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1)} text={player2.name + " WINS🏆"}></Button>
+  <div id="win-buttons">
+    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1)} text={player1.name + " WINS🏆"}></Button>
+    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1)} text={player2.name + " WINS🏆"}></Button>
+    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 0)} text={"Draw"}></Button>
   </div>
   )
   }else{return null}

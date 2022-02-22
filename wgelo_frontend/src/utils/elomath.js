@@ -15,6 +15,10 @@ const calculateElo =(elo1, elo2, result) =>{
 
         return [elo1- K_VALUE*(expected), elo2 + K_VALUE*(expected)] //player 2 won
     } 
+    else if(result === 0)  {
+
+        return [elo1+ K_VALUE* (0.5- expected),  elo2- K_VALUE* (0.5- expected)] //player 2 won
+    } 
 }
   
   const expectedScore = (elo1, elo2) =>{
