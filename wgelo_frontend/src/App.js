@@ -75,6 +75,7 @@ const PlayerMatchup = ({players, setPlayers}) => {
    <div>
     <input list="player-data-list" id="player-choice1" name="player 1" value={playerChoiceContent1} onChange={handlePlayerChoiceOnChange1} />
     <DataListPLayerNames players ={players}></DataListPLayerNames>
+    <span> vs </span>
     <input list="player-data-list" id="player-choice2" name="player 2" value={playerChoiceContent2} onChange={handlePlayerChoiceOnChange2} />
     <DataListPLayerNames players ={players}></DataListPLayerNames>
     <div id= "player-card-container">
@@ -125,8 +126,8 @@ const PlayerAddButton = ({ setPlayerform }) => {
 const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
   if(player1 &&player2){
   return(
-  <div><Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1)} text="player 1 wins"></Button>
-  <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1)} text="player 2 wins"></Button>
+  <div id="win-buttons"><Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1)} text={player1.name + " WINS🏆"}></Button>
+  <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1)} text={player2.name + " WINS🏆"}></Button>
   </div>
   )
   }else{return null}

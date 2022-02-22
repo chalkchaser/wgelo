@@ -6,16 +6,17 @@ const K_VALUE =32
 
 
 const calculateElo =(elo1, elo2, result) =>{
+    const expected = expectedScore(elo1, elo2)
+
     if(result === 1)  {
-        const rating_change = K_VALUE*(1-expectedScore(elo1, elo2))
+        return [elo1+ K_VALUE* (1- expected),  elo2- K_VALUE* (1- expected)]} //player 1 won
 
-        return [elo1+ rating_change,  elo2- rating_change]} //player 1 won
     else if(result === -1)  {
-        const rating_change = K_VALUE*(1-expectedScore(elo2, elo1))
 
-        return [elo1- rating_change, elo2 + rating_change] //player 1 lost
-    }
-  }
+        return [elo1- K_VALUE*(expected), elo2 + K_VALUE*(expected)] //player 2 won
+    } 
+}
+  
   const expectedScore = (elo1, elo2) =>{
     return 1/(1+10**((elo2-elo1)/400))
   
