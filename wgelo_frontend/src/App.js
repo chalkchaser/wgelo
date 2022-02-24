@@ -27,7 +27,7 @@ const Navigation = ({ setNavigate }) => {
   )
 }
 
-const Display = ({ navigate, players, sortBy, setSortBy, setPlayers }) => {
+const Display = ({ navigate, players, sortBy, setSortBy, setPlayers, gamesHistory }) => {
   if (navigate === "standings") {
     return (
       <PersonTable persons={players} sortBy={sortBy} setSortBy={setSortBy} />
@@ -39,9 +39,37 @@ const Display = ({ navigate, players, sortBy, setSortBy, setPlayers }) => {
     )
   
   }
-  else {
-    return (<div></div>)
+  else if(navigate === "history"){
+    return (<GamesHistory gamesHistory={gamesHistory}/>)
   }
+}
+
+
+const GamesHistory = () => {
+  const [gamesHistory, setGamesHistory] = useState([])
+
+  useEffect(() => {
+    axios
+    .get('http://localhost:3001/games')
+    .then(response => {
+      setGamesHistory(response.data)
+      console.log(response.data)
+      
+  })}, [])
+
+  
+
+  return <div>{gamesHistory.map(game =>
+  
+
+  <div>
+    {game.player1}
+
+    {game.result === 1? ' wins vs ': ' draws vs '}
+
+    {game.player2} 
+     </div> )}</div>
+  
 }
 
 const PlayerMatchup = ({players, setPlayers}) => {
@@ -153,6 +181,26 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
   axios.put(`http://localhost:3001/persons/${player2.id}`,player2).then(response =>
   console.log(response)
   )
+
+  let gameObject = {
+    player1: player1.name,
+    player2: player2.name,
+    result: Math.abs(result),
+    date: Date().toLocaleString()
+  }
+    
+  if(result === -1){
+    gameObject.player2 = player1.name
+    gameObject.player1 = player2.name
+  }
+
+
+  axios
+      .post('http://localhost:3001/games', gameObject)
+      .then(response => {
+        console.log(response)
+      })
+  
 }
 
 function App() {
@@ -160,6 +208,7 @@ function App() {
   const [navigate, setNavigate] = useState('standings')
   const [sortBy, setSortBy] = useState('elo')
   const [playerForm, setPlayerform] = useState(false)
+
 
 
 
@@ -175,13 +224,16 @@ function App() {
       
   })}, [])
 
+  
+ 
+
 
   return (
     <div id="all">
       <div id="main">
         <Navigation setNavigate={setNavigate}></Navigation>
 
-        <Display navigate={navigate} players={players} sortBy={sortBy} setSortBy={setSortBy} setPlayers={setPlayers}></Display>
+        <Display navigate={navigate} players={players} sortBy={sortBy} setSortBy={setSortBy} setPlayers={setPlayers} ></Display>
       </div>
 
       <div id='sideBar'>
