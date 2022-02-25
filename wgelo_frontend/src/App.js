@@ -62,12 +62,14 @@ const GamesHistory = () => {
   return <div>{gamesHistory.map(game =>
   
 
-  <div>
-    {game.player1}
+  <div id="games-history">
+    <span>{game.player1}</span>
 
-    {game.result === 1? ' wins vs ': ' draws vs '}
+    <span>{game.result === 1? ' wins vs ': ' draws vs '}</span>
 
-    {game.player2} 
+    <span>{game.player2}</span>
+
+    <span>{" "+ game.date}</span>
      </div> )}</div>
   
 }
@@ -186,7 +188,7 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
     player1: player1.name,
     player2: player2.name,
     result: Math.abs(result),
-    date: Date().toLocaleString()
+    date: new Date().toLocaleDateString()
   }
     
   if(result === -1){

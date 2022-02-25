@@ -199,3 +199,16 @@ body {
     background-color: rgb(194, 119, 255);
 
 }
+
+#games-history{
+    background-color: rgb(191, 166, 207);
+    border-radius: 1em;
+    font-size: large;
+    margin: 0.5em;
+    text-align: center;
+    width: 30em;
+}
+
+#games-history > :last-child{
+    display: block;
+}
