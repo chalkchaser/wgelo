@@ -75,6 +75,8 @@ app.get('/persons', (request, response) => {
     const body = request.body
     const id = Number(request.params.id)
 
+    if(persons.some(element => element.id === id)){
+
     const person = {
       name : body.name,
       elo : body.elo,
@@ -83,7 +85,11 @@ app.get('/persons', (request, response) => {
   }
   persons = persons.map(element => element.id === person.id ? person : element )
   response.json(person)
-
+    }else{
+      return response.status(409).json({ 
+        error: 'person not found' 
+      })
+    }
   })
 
   const PORT = 3001
