@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const Person = require('./models/person')
-
+const Game = require('./models/game')
 
 app.use(cors())
 app.use(express.static('build'))
@@ -15,10 +15,6 @@ app.use(express.json())
 
 
 
-let games = [
- 
-
-]
 
 app.get('/persons', (request, response) => {
     Person.find({}).then(persons => {
@@ -78,25 +74,26 @@ app.get('/persons', (request, response) => {
     })
   
   })
-  // TODO Fix up Games to Database, fix behaviour of wins and losses not being changed after match
 
   app.get('/games', (request, response) => {
-    response.json(games)
+    Game.find({}).then(game => {
+      response.json(game)
+      })
   })
 
   app.post('/games', (request, response) => {
     const body = request.body
     
-    const game = {
+    const game = new Game({
       player1: body.player1,
       player2: body.player2,
       result: body.result,
       date: body.date,
-      id: new Date().valueOf()
-    }
+    })
 
-    games = games.concat(game)
-    response.json(games)
+    game.save().then(savedGame => {
+      response.json(savedGame)
+    })
 
   })
 
