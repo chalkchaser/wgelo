@@ -2,30 +2,19 @@
 const { request, response } = require('express')
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
+app.use(cors())
+app.use(express.static('build'))
 app.use(express.json())
 
 
 let persons = [
 
-    {
-        id: 1,
-        name: "Falako",
-        elo: [1250, 1337 ,1340]
-      },
-      {
-        id: 2,
-        name: "Sharoka",
-        elo: [1320]
-      }
 ]
 
 let games = [
-    {
-        player1:"Falako",
-        player2: "Sharoka",
-        result: 1
-    }
+ 
 
 ]
 
@@ -58,6 +47,8 @@ app.get('/persons', (request, response) => {
     const person = {
         name : body.name,
         elo : body.elo,
+        wins: body.wins,
+        losses: body.losses,
         id : new Date().valueOf()
   
     }
@@ -80,6 +71,8 @@ app.get('/persons', (request, response) => {
     const person = {
       name : body.name,
       elo : body.elo,
+      elo : body.elo,
+      wins: body.wins,
       id : id //id in api link
 
   }
@@ -92,7 +85,27 @@ app.get('/persons', (request, response) => {
     }
   })
 
-  const PORT = 3001
+  app.get('/games', (request, response) => {
+    response.json(games)
+  })
+
+  app.post('/games', (request, response) => {
+    const body = request.body
+    
+    const game = {
+      player1: body.player1,
+      player2: body.player2,
+      result: body.result,
+      date: body.date,
+      id: new Date().valueOf()
+    }
+
+    games = games.concat(game)
+    response.json(games)
+
+  })
+
+  const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

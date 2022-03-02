@@ -5,6 +5,7 @@ import axios from 'axios'
 import PlayerAddWindow from './components/PlayerAddWindow'
 import  {matchPlayersElo} from './utils/elomath'
 
+const baseUrl = ''
 
 
 
@@ -50,7 +51,7 @@ const GamesHistory = () => {
 
   useEffect(() => {
     axios
-    .get('http://localhost:3001/games')
+    .get(baseUrl + '/games')
     .then(response => {
       setGamesHistory(response.data)
       console.log(response.data)
@@ -177,10 +178,10 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
   )
 
   console.log(changed)
-  axios.put(`http://localhost:3001/persons/${player1.id}`,player1).then(response =>
+  axios.put(baseUrl + `/persons/${player1.id}`,player1).then(response =>
   console.log(response)
   )
-  axios.put(`http://localhost:3001/persons/${player2.id}`,player2).then(response =>
+  axios.put(baseUrl + `/persons/${player2.id}`,player2).then(response =>
   console.log(response)
   )
 
@@ -198,7 +199,7 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
 
 
   axios
-      .post('http://localhost:3001/games', gameObject)
+      .post(baseUrl + '/games', gameObject)
       .then(response => {
         console.log(response)
       })
@@ -219,7 +220,7 @@ function App() {
 
   useEffect(() => {
     axios
-    .get('http://localhost:3001/persons')
+    .get(baseUrl + '/persons')
     .then(response => {
       setPlayers(response.data)
       console.log(response.data)
