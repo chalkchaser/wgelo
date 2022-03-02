@@ -1,17 +1,19 @@
 
+require('dotenv').config()
+
 const { request, response } = require('express')
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const Person = require('./models/person')
+
 
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 
 
-let persons = [
 
-]
 
 let games = [
  
@@ -19,18 +21,15 @@ let games = [
 ]
 
 app.get('/persons', (request, response) => {
+    Person.find({}).then(persons => {
     response.json(persons)
+    })
   })
 
   app.get('/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(person => person.id === id)
-
-    if (person) {
-        response.json(person)
-      } else {
-        response.status(404).end()
-      }
+    Person.findById(request.params.id).then(person => {
+      response.json(person)
+    })
   })
 
   app.post('/persons', (request, response) => {
@@ -44,46 +43,42 @@ app.get('/persons', (request, response) => {
       })
     }
   
-    const person = {
+    const person = new Person({
         name : body.name,
         elo : body.elo,
         wins: body.wins,
         losses: body.losses,
-        id : new Date().valueOf()
   
-    }
+    })
  
 
 
-    persons = persons.concat(person)
-  
-    response.json(person)
+    person.save().then(savedPerson => {
+      response.json(savedPerson)
+    })
   })
 
 
 
   app.put('/persons/:id', (request, response)=>{
     const body = request.body
-    const id = Number(request.params.id)
 
-    if(persons.some(element => element.id === id)){
+   
 
     const person = {
       name : body.name,
       elo : body.elo,
       elo : body.elo,
       wins: body.wins,
-      id : id //id in api link
 
   }
-  persons = persons.map(element => element.id === person.id ? person : element )
-  response.json(person)
-    }else{
-      return response.status(409).json({ 
-        error: 'person not found' 
-      })
-    }
+
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then(  updatedPerson => { response.json(updatedPerson)
+    })
+  
   })
+  // TODO Fix up Games to Database, fix behaviour of wins and losses not being changed after match
 
   app.get('/games', (request, response) => {
     response.json(games)
@@ -105,7 +100,7 @@ app.get('/persons', (request, response) => {
 
   })
 
-  const PORT = process.env.PORT || 3001
+  const PORT = process.env.PORT 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

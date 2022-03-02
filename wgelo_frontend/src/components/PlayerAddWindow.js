@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 
+const baseUrl = ''
+
 const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
 
     const [playerFormContent, setPlayerFromContent] = useState('')
@@ -22,7 +24,7 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
       }
       
       axios
-      .post('http://localhost:3001/persons', playerObject)
+      .post(baseUrl + '/persons', playerObject)
       .then(response => {
         setPlayers(players.concat(response.data))
       })
