@@ -35,6 +35,20 @@ const calculateElo =(elo1, elo2, result) =>{
     new_player1.elo = player1.elo.concat(new_elos[0])
     new_player2.elo = player2.elo.concat(new_elos[1])
 
+    if(result ===1){
+      new_player1.wins++
+      new_player2.losses++
+    }else if(result === -1){
+      new_player2.wins++
+      new_player1.losses++
+    }else if(result === 0){
+      new_player1.wins = new_player1.wins + 0.5
+      new_player1.losses = new_player1.losses + 0.5
+      new_player2.wins = new_player2.wins + 0.5
+      new_player2.losses = new_player2.losses + 0.5
+    }
+
+
   return [new_player1,new_player2]
 }
 
