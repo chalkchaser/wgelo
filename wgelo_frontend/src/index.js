@@ -1,8 +1,19 @@
-import ReactDOM from 'react-dom'
-
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+  <Auth0Provider
+    domain="chalkchaser.eu.auth0.com"
+    //domain= "chalkchaser.eu12.webtask.io"
+    clientId="LtACTx3xLWMwn7LmFQmJY5LZ7JAbgqGu"
+    redirectUri={window.location.origin}
+    audience="https://chalkchaser.eu.auth0.com/api/v2/"
+    //audience="https://chalkchaser.eu12.webtask.io/api/v2/"
+    scope="read:current_user update:current_user_metadata"
+  >
+    <App />
+  </Auth0Provider>,
+  document.getElementById("root")
+);
