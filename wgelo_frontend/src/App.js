@@ -6,8 +6,7 @@ import PlayerAddWindow from './components/PlayerAddWindow'
 import  {matchPlayersElo} from './utils/elomath'
 import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
-import { Auth0Provider } from '@auth0/auth0-react'
-
+import TestPrivate from './components/TestPrivate'
 
 const baseUrl = ''
 
@@ -219,8 +218,6 @@ function App() {
 
 
 
-
-
   //useEffect(() => { setPlayers(data.persons) }, [])
 
   useEffect(() => {
@@ -241,7 +238,8 @@ function App() {
     <div id="all">
        <span id="top">   
           <LoginOutButton/>
-          <Profiles></Profiles>
+          <Profiles/>
+          <TestPrivate/>
         </span>
       <div id="main">
         <Navigation setNavigate={setNavigate}></Navigation>
@@ -252,7 +250,7 @@ function App() {
       <div id='sideBar'>
         <PlayerAddButton setPlayerform={setPlayerform} />
         <PlayerAddWindow playerForm={playerForm} players={players} setPlayers = {setPlayers}/>
-      
+        
       </div>
     </div>
 
