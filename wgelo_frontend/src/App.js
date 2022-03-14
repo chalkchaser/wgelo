@@ -8,6 +8,8 @@ import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
 import TestPrivate from './components/TestPrivate'
 
+
+
 const baseUrl = ''
 
 
@@ -210,6 +212,8 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
   
 }
 
+
+
 function App() {
   const [players, setPlayers] = useState([])
   const [navigate, setNavigate] = useState('standings')
@@ -236,10 +240,10 @@ function App() {
   return (
    
     <div id="all">
+        <TestPrivate></TestPrivate>
        <span id="top">   
           <LoginOutButton/>
           <Profiles/>
-          <TestPrivate/>
         </span>
       <div id="main">
         <Navigation setNavigate={setNavigate}></Navigation>

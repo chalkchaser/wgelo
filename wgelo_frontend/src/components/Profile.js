@@ -8,9 +8,6 @@ const Profile = () => {
   const [userMetadata, setUserMetadata] = useState(null);
 
 
-
-
-
   useEffect(() => {
     const getUserMetadata = async () => {
       const domain = "chalkchaser.eu.auth0.com";

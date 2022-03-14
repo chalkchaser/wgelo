@@ -30,7 +30,3 @@ request(options, function (error, response, body) {
       console.log(error);
     });
 });
-
-const answerTest = () => {
-    
-}

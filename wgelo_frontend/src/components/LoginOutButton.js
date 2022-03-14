@@ -5,9 +5,9 @@ const LoginOutButton = () => {
 
 
   
-  const { isAuthenticated,loginWithPopup, logout } = useAuth0();
+  const { isAuthenticated,loginWithRedirect, logout } = useAuth0();
   if(!isAuthenticated){
-    return ( <button onClick={() => loginWithPopup()}>Log In</button>)
+    return ( <button onClick={() => loginWithRedirect()}>Log In</button>)
   }else{
       return(
          <button onClick={() => logout({ returnTo: window.location.origin })}>
