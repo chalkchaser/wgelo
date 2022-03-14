@@ -48,7 +48,7 @@ const Private = () => {
   }
 
   getUserMetadata()
-})
+}, [])
 
 return(
   <div></div>
