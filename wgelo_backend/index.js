@@ -58,7 +58,7 @@ app.get('/api/private', checkJwt, function(req, res) {
 
 
 app.get('/persons', checkJwt , (request, response) => {
-    Person.find({}).then(persons => {
+    Person.find({user : request.auth.payload.sub}).then(persons => {
     response.json(persons)
     })
   })
