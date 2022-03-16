@@ -20,16 +20,15 @@ const Private = () => {
 
         const accessToken = await getAccessTokenSilently({
           audience: `https://wgelo/api`,
-          scope: "read:current_user",
+          scope: "openid",
         }
 
         
         )
-        console.log(accessToken)
         
         const options = { 
           method: "GET",
-          url: "http://localhost:3001/api/private",
+          url: "/api/private",
           headers: { "authorization": "Bearer " + accessToken },
         };
       

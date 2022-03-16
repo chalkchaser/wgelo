@@ -7,6 +7,7 @@ import  {matchPlayersElo} from './utils/elomath'
 import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
 import TestPrivate from './components/TestPrivate'
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
@@ -224,6 +225,7 @@ function App() {
 
   //useEffect(() => { setPlayers(data.persons) }, [])
 
+  /*
   useEffect(() => {
     axios
     .get(baseUrl + '/persons')
@@ -233,7 +235,52 @@ function App() {
       
   })}, [])
 
+  */
+ 
+    const {getAccessTokenSilently } = useAuth0();
+    
   
+    
+    useEffect(() => {
+     
+  
+      const getUserMetadata = async () => {
+        const domain = "chalkchaser.eu.auth0.com";
+        try {
+  
+          const accessToken = await getAccessTokenSilently({
+            audience: `https://wgelo/api`,
+            scope: "openid",
+          }
+  
+          
+          )
+          console.log(accessToken)
+          
+          const options = { 
+            method: "GET",
+            url: baseUrl +"/persons",
+            headers: { "authorization": "Bearer " + accessToken },
+          };
+        
+            axios(options)
+        .then(response => {
+          setPlayers(response.data);
+        })
+  
+        
+    }    catch (e) {
+      console.log(e.message);
+    }
+  
+    }
+  
+    getUserMetadata()
+  }, [])
+  
+
+
+
  
 
 

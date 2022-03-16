@@ -1,12 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 const baseUrl = ''
 
 const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
 
     const [playerFormContent, setPlayerFromContent] = useState('')
+    const {getAccessTokenSilently } = useAuth0();
   
     const handlePlayerFormOnChange = (event) => {
       console.log(event.target.value)
@@ -23,12 +27,54 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
         id: parseInt(Math.random()*10000)
       }
       
+      /* 
       axios
       .post(baseUrl + '/persons', playerObject)
       .then(response => {
         setPlayers(players.concat(response.data))
       })
+      */
+
   
+  
+      const postPlayer = async () => {
+        const domain = "chalkchaser.eu.auth0.com";
+        try {
+  
+          const accessToken = await getAccessTokenSilently({
+            audience: `https://wgelo/api`,
+            scope: "openid",
+          }
+  
+          
+          )
+          console.log("player post",accessToken)
+          
+          const options = { 
+            method: "POST",
+            url: "/persons",
+            headers: { "authorization": "Bearer " + accessToken },
+            data: playerObject
+          };
+        
+        console.log("try to post player")
+
+         axios(options)
+        .then(response => {
+          setPlayers(players.concat(response.data))
+        })
+  
+        
+    }    catch (e) {
+      console.log(e.message);
+    }
+  
+    }
+  
+    postPlayer()
+  
+
+
     }
   
     if (playerForm) {

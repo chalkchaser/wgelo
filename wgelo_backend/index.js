@@ -8,6 +8,11 @@ const cors = require('cors')
 const Person = require('./models/person')
 const Game = require('./models/game')
 const { auth } = require('express-oauth2-jwt-bearer');
+const axios = require("axios");
+const { default: mongoose } = require('mongoose')
+const res = require('express/lib/response')
+
+
 
 app.use(cors())
 app.use(express.static('build'))
@@ -24,21 +29,35 @@ const checkJwt = auth({
 });
 
 app.get('/api/public', function(req, res) {
+
+
   res.json({
+    
+  
+
+
     message: 'Hello from a public endpoint! You don\'t need to be authenticated to see this.'
   });
 });
 
 // This route needs authentication
 app.get('/api/private', checkJwt, function(req, res) {
+
+  let sub = req.auth.payload.sub
+  
+  
+
   res.json({
-    message: 'Hello from a private endpoint! You need to be authenticated to see this.'
+    
+    
+
+    message: 'Hello from a private endpoint! You need to be authenticated to see this.' + sub
   });
 });
 
 
 
-app.get('/persons' , (request, response) => {
+app.get('/persons', checkJwt , (request, response) => {
     Person.find({}).then(persons => {
     response.json(persons)
     })
@@ -50,7 +69,9 @@ app.get('/persons' , (request, response) => {
     })
   })
 
-  app.post('/persons', (request, response) => {
+  app.post('/persons', checkJwt, (request, response) => {
+
+   
     
     const body = request.body
 
@@ -66,10 +87,10 @@ app.get('/persons' , (request, response) => {
         elo : body.elo,
         wins: body.wins,
         losses: body.losses,
+        user: request.auth.payload.sub
   
     })
- 
-
+    console.log(request.auth.payload.sub)
 
     person.save().then(savedPerson => {
       response.json(savedPerson)
@@ -106,6 +127,8 @@ app.get('/persons' , (request, response) => {
   app.post('/games', (request, response) => {
     const body = request.body
     
+    Game.index
+
     const game = new Game({
       player1: body.player1,
       player2: body.player2,

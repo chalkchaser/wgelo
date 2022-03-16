@@ -14,9 +14,11 @@ const personSchema = new mongoose.Schema({
   name: String,
   elo: Array,
   wins: Number,
-  losses: Number
-
+  losses: Number,
+  user: String
 })
+
+personSchema.index({ user : 1 })
 
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
