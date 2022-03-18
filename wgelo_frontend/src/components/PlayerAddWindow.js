@@ -48,7 +48,6 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
   
           
           )
-          console.log("player post",accessToken)
           
           const options = { 
             method: "POST",
