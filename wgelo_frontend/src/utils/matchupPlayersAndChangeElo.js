@@ -1,11 +1,49 @@
 import axios from 'axios'
 import  {matchPlayersElo} from './elomath'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 
 const baseUrl = ''
 
-const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, result) =>{
+
+const putPlayer = async (player, getAccessTokenSilently) => {
+  const domain = "chalkchaser.eu.auth0.com";
+  try {
+
+    const accessToken = await getAccessTokenSilently({
+      audience: `https://wgelo/api`,
+      scope: "openid",
+    }
+
+    
+    )
+    
+    const options = { 
+      method: "PUT",
+      url: `/persons/${player.id}`,
+      headers: { "authorization": "Bearer " + accessToken },
+      data: player
+    };
+  
+  console.log("try to put player")
+
+   axios(options)
+  .then(response => {
+    console.log(response)
+
+  })
+
+  
+}    catch (e) {
+console.log(e.message);
+}
+
+}
+
+
+const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, result, getAccessTokenSilently) =>{
     const changed = matchPlayersElo(player1,player2, result)
   
     setPlayers(players.map(player =>{
@@ -18,12 +56,22 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
   
     //TODO: change to check for JWT
 
+
+        /*
     axios.put(baseUrl + `/persons/${player1.id}`,player1).then(response =>
     console.log(response)
     )
     axios.put(baseUrl + `/persons/${player2.id}`,player2).then(response =>
     console.log(response)
-    )
+    )*/
+
+    
+   
+
+  putPlayer(player1, getAccessTokenSilently)
+  putPlayer(player2, getAccessTokenSilently)
+
+
   
     let gameObject = {
       player1: player1.name,
