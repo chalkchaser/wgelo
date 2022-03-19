@@ -99,7 +99,7 @@ app.get('/persons', checkJwt , (request, response) => {
 
 
 
-  app.put('/persons/:id', (request, response)=>{
+  app.put('/persons/:id', checkJwt,(request, response)=>{
     const body = request.body
 
    

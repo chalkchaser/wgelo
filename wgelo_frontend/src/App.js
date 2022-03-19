@@ -3,10 +3,9 @@ import PersonTable  from './components/PersonTable'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import PlayerAddWindow from './components/PlayerAddWindow'
-import  {matchPlayersElo} from './utils/elomath'
+import {matchupPlayersAndChangeElo} from './utils/matchupPlayersAndChangeElo'
 import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
-import TestPrivate from './components/TestPrivate'
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -173,45 +172,7 @@ const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
   }else{return null}
 }
 
-const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, result) =>{
-  const changed = matchPlayersElo(player1,player2, result)
 
-  setPlayers(players.map(player =>{
-      if( player1.id === player.id) {return changed[0]}
-      else if(player2.id === player.id){return changed[1]}
-      else{return player}
-      }
-    )
-  )
-
-  console.log(changed)
-  axios.put(baseUrl + `/persons/${player1.id}`,player1).then(response =>
-  console.log(response)
-  )
-  axios.put(baseUrl + `/persons/${player2.id}`,player2).then(response =>
-  console.log(response)
-  )
-
-  let gameObject = {
-    player1: player1.name,
-    player2: player2.name,
-    result: Math.abs(result),
-    date: new Date().toLocaleDateString()
-  }
-    
-  if(result === -1){
-    gameObject.player2 = player1.name
-    gameObject.player1 = player2.name
-  }
-
-
-  axios
-      .post(baseUrl + '/games', gameObject)
-      .then(response => {
-        console.log(response)
-      })
-  
-}
 
 
 
@@ -287,7 +248,6 @@ function App() {
   return (
    
     <div id="all">
-        <TestPrivate></TestPrivate>
        <span id="top">   
           <LoginOutButton/>
           <Profiles/>

@@ -14,7 +14,7 @@ const gameSchema = new mongoose.Schema({
   player1: String,
   player2: String,
   result: Number,
-  date: Date
+  date: String
 
 })
 
