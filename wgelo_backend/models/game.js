@@ -14,9 +14,11 @@ const gameSchema = new mongoose.Schema({
   player1: String,
   player2: String,
   result: Number,
-  date: String
-
+  date: String,
+  user: String
 })
+
+gameSchema.index({ user : 1 })
 
 gameSchema.set('toJSON', {
   transform: (document, returnedObject) => {

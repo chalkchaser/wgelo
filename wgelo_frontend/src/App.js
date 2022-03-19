@@ -6,6 +6,7 @@ import PlayerAddWindow from './components/PlayerAddWindow'
 import {matchupPlayersAndChangeElo} from './utils/matchupPlayersAndChangeElo'
 import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
+import GamesHistory from './components/GamesHistory'
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -52,34 +53,7 @@ const Display = ({ navigate, players, sortBy, setSortBy, setPlayers, gamesHistor
 }
 
 
-const GamesHistory = () => {
-  const [gamesHistory, setGamesHistory] = useState([])
 
-  useEffect(() => {
-    axios
-    .get(baseUrl + '/games')
-    .then(response => {
-      setGamesHistory(response.data)
-      console.log(response.data)
-      
-  })}, [])
-
-  
-
-  return <div>{gamesHistory.map(game =>
-  
-
-  <div id="games-history">
-    <span>{game.player1}</span>
-
-    <span>{game.result === 1? ' wins vs ': ' draws vs '}</span>
-
-    <span>{game.player2}</span>
-
-    <span>{" "+ game.date}</span>
-     </div> )}</div>
-  
-}
 
 const PlayerMatchup = ({players, setPlayers}) => {
   const [playerChoiceContent1, setPlayerChoiceContent1] = useState('')
@@ -187,19 +161,7 @@ function App() {
 
 
 
-  //useEffect(() => { setPlayers(data.persons) }, [])
 
-  /*
-  useEffect(() => {
-    axios
-    .get(baseUrl + '/persons')
-    .then(response => {
-      setPlayers(response.data)
-      console.log(response.data)
-      
-  })}, [])
-
-  */
  
     const {getAccessTokenSilently } = useAuth0();
     

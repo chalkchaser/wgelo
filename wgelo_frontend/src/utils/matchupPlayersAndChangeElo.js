@@ -43,6 +43,40 @@ console.log(e.message);
 }
 
 
+const postGame = async (game,getAccessTokenSilently) => {
+  const domain = "chalkchaser.eu.auth0.com";
+  try {
+
+    const accessToken = await getAccessTokenSilently({
+      audience: `https://wgelo/api`,
+      scope: "openid",
+    }
+
+    
+    )
+    
+    const options = { 
+      method: "POST",
+      url: '/games',
+      headers: { "authorization": "Bearer " + accessToken },
+      data: game
+    };
+  
+
+   axios(options)
+  .then(response => {
+    console.log(response)
+
+  })
+
+  
+}    catch (e) {
+console.log(e.message);
+}
+
+}
+
+
 const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, result, getAccessTokenSilently) =>{
     const changed = matchPlayersElo(player1,player2, result)
   
@@ -86,11 +120,7 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
     }
   
   
-    axios
-        .post(baseUrl + '/games', gameObject)
-        .then(response => {
-          console.log(response)
-        })
+    postGame(gameObject, getAccessTokenSilently)
     
   }
   export  {matchupPlayersAndChangeElo}

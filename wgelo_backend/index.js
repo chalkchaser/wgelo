@@ -109,6 +109,8 @@ app.get('/persons', checkJwt , (request, response) => {
       elo : body.elo,
       elo : body.elo,
       wins: body.wins,
+      user: request.auth.payload.sub
+
 
   }
 
@@ -118,13 +120,13 @@ app.get('/persons', checkJwt , (request, response) => {
   
   })
 
-  app.get('/games', (request, response) => {
-    Game.find({}).then(game => {
+  app.get('/games', checkJwt, (request, response) => {
+    Game.find({user : request.auth.payload.sub}).then(game => {
       response.json(game)
       })
   })
 
-  app.post('/games', (request, response) => {
+  app.post('/games', checkJwt,(request, response) => {
     const body = request.body
     
     Game.index
@@ -134,6 +136,7 @@ app.get('/persons', checkJwt , (request, response) => {
       player2: body.player2,
       result: body.result,
       date: body.date,
+      user: request.auth.payload.sub
     })
 
     game.save().then(savedGame => {
