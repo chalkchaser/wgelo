@@ -16,7 +16,10 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
       console.log(event.target.value)
       setPlayerFromContent(event.target.value)
     }
+
+    console.log("test")
   
+
     const addCreatedPlayer  = (e) => {
       e.preventDefault()
       const playerObject = {
@@ -24,9 +27,14 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
         wins: 0,
         losses: 0,
         elo: [1200],
-        id: parseInt(Math.random()*10000)
       }
-      
+
+      if(players.filter(player => player.name === playerFormContent).length >=1){
+        window.alert("player already exists")
+        return
+        
+      }
+    
       /* 
       axios
       .post(baseUrl + '/persons', playerObject)
@@ -34,11 +42,14 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
         setPlayers(players.concat(response.data))
       })
       */
-
+  
   
   
       const postPlayer = async () => {
         const domain = "chalkchaser.eu.auth0.com";
+
+        
+
         try {
   
           const accessToken = await getAccessTokenSilently({

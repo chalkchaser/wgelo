@@ -81,6 +81,9 @@ app.get('/persons', checkJwt , (request, response) => {
         error: 'content missing' 
       })
     }
+    
+    
+
   
     const person = new Person({
         name : body.name,
@@ -90,7 +93,7 @@ app.get('/persons', checkJwt , (request, response) => {
         user: request.auth.payload.sub
   
     })
-    console.log(request.auth.payload.sub)
+
 
     person.save().then(savedPerson => {
       response.json(savedPerson)
