@@ -35,20 +35,9 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
         
       }
     
-      /* 
-      axios
-      .post(baseUrl + '/persons', playerObject)
-      .then(response => {
-        setPlayers(players.concat(response.data))
-      })
-      */
-  
-  
   
       const postPlayer = async () => {
         const domain = "chalkchaser.eu.auth0.com";
-
-        
 
         try {
   
@@ -82,7 +71,7 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
     }
   
     postPlayer()
-  
+    setPlayerFromContent('')
 
 
     }
