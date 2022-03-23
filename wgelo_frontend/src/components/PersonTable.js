@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const PersonTable = ({ persons, sortBy, setSortBy }) => {
     const [selectedPerson, setSelectedPerson] = useState()
-    const [page, setPage] =useState()
+    const [page, setPage] =useState(1)
 
 
 
@@ -43,11 +43,12 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
           </tr>
         </thead>
         <tbody>
-          {persons.slice((page-1)*16,page*16).map(person => <tr key={person.id}>
+          {persons.slice((page-1)*16,page*16).map(person => 
+          <tr key={person.id} onClick={()=>setSelectedPerson(person)}>
             <td>{person.rank}</td>
             <td>{person.name}</td>
             <td>{person.wins} - {person.losses}({(person.wins / (person.wins + person.losses)).toFixed(2)})</td>
-            <td>{person.elo.at(-1)}</td>
+            <td>{Math.round(person.elo.at(-1))}</td>
           </tr>)}
   
         </tbody>
