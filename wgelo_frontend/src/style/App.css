@@ -1,5 +1,5 @@
 body {
-    background-color: #7C4EE0;
+    background-color: #331457;
     font-family: sans-serif;
     color: rgb(8, 3, 7);
 
@@ -27,7 +27,7 @@ body {
     font-size: 1.8em;
     padding: 0.5em;
     border-radius: 0.25em;
-    background: rgb(48, 192, 96);
+    background: rgb(97, 194, 97);
     transform: skew(-30deg);
 
     
@@ -48,7 +48,7 @@ body {
 
 }
 #sideBar button{
-    background:rgb(191, 166, 207);
+    background:rgb(235, 162, 27);
     font-size: 1.4em;
     padding: 0.4em;
     border-radius: 0.5em;
@@ -80,7 +80,7 @@ body {
     margin-top: 1em;
     width: 6em;
     height: 1.5em;
-    background-color: rgb(74, 255, 165);
+    background-color: rgb(74, 255, 195);
 
 }
 
@@ -94,13 +94,14 @@ body {
     font-size: 2em;
     text-align: center;
     border-radius: 1em;
+    color: rgb(223, 212, 215)
 
 }
 
 
 
 #personTable thead td{
-    background:rgb(191, 166, 207);
+    background:rgb(147, 85, 158);
 }
 #personTable thead td:first-child{
     border-top-left-radius: 1em;
@@ -110,17 +111,18 @@ body {
     border-top-right-radius: 1em;
 }
 #personTable thead td:hover{
-    background-color: rgb(74, 255, 165);
+    background-color: rgb(111, 241, 180);
+    color: black;
 }
 
 
 #personTable tbody tr:nth-child(even) td{
-    background:rgb(191, 166, 207);
+    background:rgb(151, 93, 161);
 }
 
 
 #personTable tbody tr:nth-child(odd) td{
-    background:rgb(173, 120, 175);
+    background:rgb(84, 61, 136);
 }
 
 
@@ -145,8 +147,9 @@ body {
 
 
 #personTable tbody tr:hover>td{
-    background: rgb(74, 255, 165);
-    background-color: rgb(74, 255, 165);
+    background: rgb(111, 241, 180);
+    background-color: rgb(111, 241, 180);
+    color: black;
 
 }
 
