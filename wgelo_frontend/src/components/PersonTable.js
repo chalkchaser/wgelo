@@ -57,7 +57,19 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
       </div>
     )
   }else{
-    return(<div class="playerDetail">{selectedPerson.name}</div>)
+    return(
+
+    <div class="playerDetail"><div>name: {selectedPerson.name}</div>
+    <div>elo: {Math.round(selectedPerson.elo.at(-1))}</div>
+    <div>wins: {selectedPerson.wins}</div>
+    <div>losses: {selectedPerson.losses}</div>
+    <div>rank: {selectedPerson.rank}</div>
+    <button onClick={()=>setSelectedPerson(null)}>return</button>
+
+    </div>
+
+    
+    )
   }
 }
   
