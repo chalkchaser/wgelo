@@ -1,5 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
+import { LineChart, Line,XAxis, YAxis, ResponsiveContainer} from 'recharts';
+
+
+
+
+
+
+
+
+
 
 const PersonTable = ({ persons, sortBy, setSortBy }) => {
     const [selectedPerson, setSelectedPerson] = useState()
@@ -29,6 +39,7 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
     for (let i = 1;  i-1 < persons.length/16; i++) {
       numbers.push(<button onClick={() =>{setPage(i)}}>{i}</button>);
     }
+
   
     if(!selectedPerson){
     return (
@@ -57,17 +68,34 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
       </div>
     )
   }else{
+
+    const data = selectedPerson.elo.map((value,index)=>({index,value}))
+    const min = Math.floor((Math.min(...selectedPerson.elo))/100)*100
+    const max = Math.ceil(Math.max(...selectedPerson.elo)/100)*100
+    
+
+    
     return(
 
-    <div class="player-detail"><div>name: {selectedPerson.name}</div>
+    <div className="player-detail"><div>name: {selectedPerson.name}</div>
     <div>elo: {Math.round(selectedPerson.elo.at(-1))}</div>
     <div>wins: {selectedPerson.wins}</div>
     <div>losses: {selectedPerson.losses}</div>
     <div>rank: {selectedPerson.rank}</div>
     <button onClick={()=>setSelectedPerson(null)}>return</button>
-
+      
+    <ResponsiveContainer width="90%" aspect={3}>
+      <LineChart className="chart "width={600} height={300} data={data} >
+      <XAxis dataKey="index"/>
+      <YAxis domain={[min, max]} type="number"
+        tickFormatter={(value) => Math.round(value)}     
+        />
+        
+      <Line  dataKey="value" stroke="#8884d8" />
+      </LineChart>
+    </ResponsiveContainer>
     </div>
-
+   
     
     )
   }

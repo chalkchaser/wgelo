@@ -229,3 +229,11 @@ body {
 .player-detail > *{
     margin: 0.5em;
 }
+
+.chart{
+    background-color: rgb(223, 212, 215);
+    border-radius: 1em;
+    padding: 1em;
+    font-size: 0.5em;
+
+}
