@@ -59,7 +59,7 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
   }else{
     return(
 
-    <div class="playerDetail"><div>name: {selectedPerson.name}</div>
+    <div class="player-detail"><div>name: {selectedPerson.name}</div>
     <div>elo: {Math.round(selectedPerson.elo.at(-1))}</div>
     <div>wins: {selectedPerson.wins}</div>
     <div>losses: {selectedPerson.losses}</div>

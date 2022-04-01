@@ -112,6 +112,7 @@ app.get('/persons', checkJwt , (request, response) => {
       elo : body.elo,
       elo : body.elo,
       wins: body.wins,
+      losses: body.losses,
       user: request.auth.payload.sub
 
 

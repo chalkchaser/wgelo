@@ -212,3 +212,20 @@ body {
 #games-history > :last-child{
     display: block;
 }
+
+.player-detail{
+    border-collapse: collapse;
+    border-spacing: 0.5em;
+    outline-offset: 15px;
+    width: 80%;
+    font-size: 1.5em;
+    border-radius: 1em;
+    background-color:rgb(151, 93, 161);
+    padding: 1em;
+    color: rgb(223, 212, 215);
+    font-weight: bold;
+}
+
+.player-detail > *{
+    margin: 0.5em;
+}
