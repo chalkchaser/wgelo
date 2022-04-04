@@ -9,6 +9,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 const GamesHistory = () => {
     const [gamesHistory, setGamesHistory] = useState([])
     const {getAccessTokenSilently } = useAuth0();
+    const [page, setPage] =useState(1)
+
+
 
     useEffect(() => {
 
@@ -47,7 +50,13 @@ const GamesHistory = () => {
 }, [])
     
   
-    return <div>{gamesHistory.map(game =>
+let numbers = [];
+for (let i = 1;  i-1 < gamesHistory.length/12; i++) {
+  numbers.push(<button onClick={() =>{setPage(i)}}>{i}</button>);
+}
+
+
+    return <div>{gamesHistory.reverse().slice((page-1)*12,page*12).map(game =>
     
   
     <div id="games-history">
@@ -58,7 +67,11 @@ const GamesHistory = () => {
       <span>{game.player2}</span>
   
       <span>{" "+ game.date}</span>
-       </div> )}</div>
+       </div> )}
+       <div>{numbers}</div>
+
+       </div>
+       
     
   }
   export default GamesHistory

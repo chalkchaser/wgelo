@@ -87,17 +87,6 @@ const matchupPlayersAndChangeElo = (setPlayers, players, player1, player2, resul
         }
       )
     )
-  
-    //TODO: change to check for JWT
-
-
-        /*
-    axios.put(baseUrl + `/persons/${player1.id}`,player1).then(response =>
-    console.log(response)
-    )
-    axios.put(baseUrl + `/persons/${player2.id}`,player2).then(response =>
-    console.log(response)
-    )*/
 
     
    

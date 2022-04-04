@@ -38,7 +38,7 @@ const Navigation = ({ setNavigate }) => {
 const Display = ({ navigate, players, sortBy, setSortBy, setPlayers, gamesHistory }) => {
   if (navigate === "standings") {
     return (
-      <PersonTable persons={players} sortBy={sortBy} setSortBy={setSortBy} />
+      <PersonTable persons={players} sortBy={sortBy} setSortBy={setSortBy} setPlayers={setPlayers} />
     )
 
   }else if(navigate === "record_game"){
@@ -139,13 +139,15 @@ const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
 
 
   if(player1 &&player2){
-  return(
-  <div id="win-buttons">
-    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1,getAccessTokenSilently)} text={player1.name + " WINS🏆"}></Button>
-    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1,getAccessTokenSilently)} text={player2.name + " WINS🏆"}></Button>
-    <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 0,getAccessTokenSilently)} text={"Draw"}></Button>
-  </div>
-  )
+    if(player1 !==player2){
+    return(
+    <div id="win-buttons">
+      <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 1,getAccessTokenSilently)} text={player1.name + " WINS🏆"}></Button>
+      <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, -1,getAccessTokenSilently)} text={player2.name + " WINS🏆"}></Button>
+      <Button onClick={()=> matchupPlayersAndChangeElo(setPlayers, players, player1, player2, 0,getAccessTokenSilently)} text={"Draw"}></Button>
+    </div>)
+    }else{ return(<div>A Player can not play with himself!</div>)}
+  
   }else{return null}
 }
 

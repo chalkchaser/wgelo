@@ -149,6 +149,20 @@ app.get('/persons', checkJwt , (request, response) => {
 
   })
 
+
+  app.delete('/persons/:id', checkJwt,(request, response)=>{
+
+   
+
+   
+  Person.findByIdAndDelete(request.params.id)
+    .then(  deletedPerson => { response.json(deletedPerson)
+    })
+  
+  })
+
+  
+
   const PORT = process.env.PORT 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

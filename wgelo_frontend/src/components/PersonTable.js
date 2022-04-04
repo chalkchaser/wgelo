@@ -1,19 +1,65 @@
 import React from 'react';
 import { useState } from 'react';
 import { LineChart, Line,XAxis, YAxis, ResponsiveContainer} from 'recharts';
+import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
 
+const deletePerson = (person, persons, setSelectedPerson, getAccessTokenSilently,  setPlayers) => {
+  console.log(person.name + " should be deleted")
+  
+
+
+  if(window.confirm('do you really want to delete ' + person.name + "?")){
+    
+    const deletePersonApi = async () => {
+      const domain = "chalkchaser.eu.auth0.com";
+      try {
+
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://wgelo/api`,
+          scope: "openid",
+        }
+
+        
+        )
+        
+        const options = { 
+          method: "DELETE",
+          url: "/persons/"+ person.id,
+          headers: { "authorization": "Bearer " + accessToken },
+        };
+      
+          axios(options)
+      .then(response => {
+        setSelectedPerson(null)
+        alert('Player has been deleted')
+        setPlayers(persons.filter(player => person.id!== player.id))
+      })
+
+      
+  }    catch (e) {
+    console.log(e.message);
+  }
+
+  }
+
+  deletePersonApi()
+
+  }else{
+    //do nothing
+  }
+}
 
 
 
-
-
-
-const PersonTable = ({ persons, sortBy, setSortBy }) => {
+const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
     const [selectedPerson, setSelectedPerson] = useState()
     const [page, setPage] =useState(1)
+    const {getAccessTokenSilently } = useAuth0();
+
 
 
 
@@ -82,7 +128,6 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
     <div>wins: {selectedPerson.wins}</div>
     <div>losses: {selectedPerson.losses}</div>
     <div>rank: {selectedPerson.rank}</div>
-    <button onClick={()=>setSelectedPerson(null)}>return</button>
       
     <ResponsiveContainer width="90%" aspect={3}>
       <LineChart className="chart "width={600} height={300} data={data} >
@@ -94,6 +139,9 @@ const PersonTable = ({ persons, sortBy, setSortBy }) => {
       <Line  dataKey="value" stroke="#8884d8" />
       </LineChart>
     </ResponsiveContainer>
+    <button onClick={()=>setSelectedPerson(null)}>return</button>
+    <button onClick={()=>deletePerson(selectedPerson, persons, setSelectedPerson, getAccessTokenSilently, setPlayers)}>delete</button>
+
     </div>
    
     
