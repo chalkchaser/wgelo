@@ -18,7 +18,8 @@ const baseUrl = ''
 const Button = (props) => {
   return (
     <button onClick={props.onClick}>
-      <div className='buttonText'>{props.text}</div>
+      <div className='buttonText'><span className='buttonLetters'>{props.text}</span> <span className='icon'>{props.icon}</span></div>
+     
     </button>
   )
 }
@@ -27,9 +28,9 @@ const Navigation = ({ setNavigate }) => {
 
   return (
     <div id='navigation'>
-      <Button class text="standings" onClick={() => setNavigate("standings")}></Button>
-      <Button text="record game" onClick={() => setNavigate("record_game")}></Button>
-      <Button text="history" onClick={() => setNavigate("history")}></Button>
+      <Button class text="standings" icon="🏅" onClick={() => setNavigate("standings")}></Button>
+      <Button text="record game" icon="⚔️" onClick={() => setNavigate("record_game")}></Button>
+      <Button text="history" icon="📖" onClick={() => setNavigate("history")}></Button>
      
     </div>
   )

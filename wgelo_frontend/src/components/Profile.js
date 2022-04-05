@@ -46,14 +46,8 @@ const Profile = () => {
   if(isAuthenticated){
   return (
     (
-      <div>
+      <div className="logged-in-text">
         you are logged in as {user.name}
-        <h3>User Metadata</h3>
-      {userMetadata ? (
-        <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
-      ) : (
-        "No user metadata defined"
-      )}
       </div>
      
     )
@@ -61,7 +55,7 @@ const Profile = () => {
     }else{
         return (
             (
-              <div>
+              <div className="logged-in-text">
                 you are not logged in
               </div>
             )
