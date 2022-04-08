@@ -1,5 +1,18 @@
+
 body {
-    background-color: #331457;
+    --background-color-main: #331457;
+    --main-color-1:rgb(84, 61, 136);
+    --main-color-2: rgb(147, 85, 158);
+    --secondary-color:rgb(53, 206, 112);
+    --hover-color: rgb(74, 255, 195);
+    --tertiary-color:rgb(235, 162, 27);
+    --hover-color-2:rgb(194, 119, 255);
+
+
+    --font-color-1:rgb(223, 212, 215);
+ 
+
+    background-color: var(--background-color-main);
     font-family: sans-serif;
     color: rgb(8, 3, 7);
 
@@ -17,7 +30,15 @@ body {
     grid-column: 2;
     grid-row: 1;
 }
-
+ 
+#about{
+    background:var(--main-color-1);
+    color:var(--font-color-1);
+    font-size: 1.2em;
+   border-radius: 1em;
+   padding: 2em;
+   margin: 2em;
+}
 
 
 
@@ -37,7 +58,7 @@ body {
     font-size: 1.8em;
     padding: 0.5em;
     border-radius: 0.25em;
-    background: rgb(53, 206, 112);
+    background:var(--secondary-color);
     transform: skew(-30deg);
     white-space: nowrap;
     
@@ -48,7 +69,7 @@ body {
 }
 
 #navigation button:hover{
-   background-color: rgb(74, 255, 165);
+   background-color: var(--hover-color)
 }
 #navigation .buttonText{
     font-size: 0.8em;
@@ -62,7 +83,7 @@ body {
 
 }
 #sideBar button{
-    background:rgb(235, 162, 27);
+    background:var(--tertiary-color);
     font-size: 1.4em;
     padding: 0.4em;
     border-radius: 0.5em;
@@ -94,10 +115,12 @@ body {
     margin-top: 1em;
     width: 6em;
     height: 1.5em;
-    background-color: rgb(74, 255, 195);
+    background-color: var(--secondary-color)
 
 }
-
+#submit_player input[type="submit"]:hover{
+    background-color: var(--hover-color);
+}
 
 
 #personTable{
@@ -108,7 +131,7 @@ body {
     font-size: 2em;
     text-align: center;
     border-radius: 1em;
-    color: rgb(223, 212, 215);
+    color: var(--font-color-1);
     margin-top: 1em;
     margin-bottom: 1em;
 }
@@ -116,7 +139,7 @@ body {
 
 
 #personTable thead td{
-    background:rgb(147, 85, 158);
+    background:var(--main-color-2)
 }
 #personTable thead td:first-child{
     border-top-left-radius: 1em;
@@ -126,18 +149,18 @@ body {
     border-top-right-radius: 1em;
 }
 #personTable thead td:hover{
-    background-color: rgb(111, 241, 180);
+    background-color: var(--hover-color);
     color: black;
 }
 
 
 #personTable tbody tr:nth-child(even) td{
-    background:rgb(151, 93, 161);
+    background:var(--main-color-2)
 }
 
 
 #personTable tbody tr:nth-child(odd) td{
-    background:rgb(84, 61, 136);
+    background:var(--main-color-1)
 }
 
 
@@ -162,8 +185,7 @@ body {
 
 
 #personTable tbody tr:hover>td{
-    background: rgb(111, 241, 180);
-    background-color: rgb(111, 241, 180);
+    background-color:var(--hover-color);
     color: black;
 
 }
@@ -176,7 +198,7 @@ body {
 .player-card{
     height: 5em;
     width: 10em;
-    background-color:rgb(235, 162, 27);
+    background-color:var(--tertiary-color);
     background-size: 15em;
     margin:1em;
     padding-left: 0.5em;
@@ -191,7 +213,7 @@ body {
 
 #win-buttons > *{
     display: inline;
-    background-color: rgb(48, 192, 96);
+    background-color: var(--secondary-color);
     vertical-align: middle;
     margin-left: 1em;
     width: 8em;
@@ -202,22 +224,23 @@ body {
 
 #win-buttons> :last-child{
 
-    background-color: rgb(189, 164, 185)
+    background-color: var(--main-color-2)
 
 }
 
 #win-buttons > *:hover{
-    background-color: rgb(74, 255, 165);
+    background-color: var(--hover-color)
 }
 
 #win-buttons> :last-child:hover{
 
-    background-color: rgb(194, 119, 255);
+    background-color:var(--hover-color-2);
 
 }
 
 #games-history{
-    background-color: rgb(191, 166, 207);
+    background-color: var(--main-color-1);
+    color: var(--font-color-1);
     border-radius: 1em;
     font-size: large;
     margin: 0.5em;
@@ -236,10 +259,11 @@ body {
     width: 80%;
     font-size: 1.5em;
     border-radius: 1em;
-    background-color:rgb(151, 93, 161);
+    background-color:var(--main-color-2);
     padding: 1em;
-    color: rgb(223, 212, 215);
+    color: var(--font-color-1);
     font-weight: bold;
+    margin-top: 1.3em;
 }
 
 .player-detail > *{
@@ -247,7 +271,7 @@ body {
 }
 
 .chart{
-    background-color: rgb(223, 212, 215);
+    background-color: var(--font-color-1);
     border-radius: 1em;
     padding: 1em;
     font-size: 0.5em;
@@ -275,8 +299,8 @@ body {
     }
     #top{
         position: absolute;
-        right:20px;
-        top:20px;
+        right:1%;
+        top:5px;
         display: block;
         flex-wrap: wrap;
     }
@@ -284,5 +308,13 @@ body {
         display:none;
     }
 
+    #main{
+        margin:0.8em;
+        font-size: 0.8em;
+    }
+    #personTable td{
+        padding: 0.15em;
+    }
+   
 
   }

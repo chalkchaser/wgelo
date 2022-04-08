@@ -162,9 +162,9 @@ function App() {
   const [sortBy, setSortBy] = useState('elo')
   const [playerForm, setPlayerform] = useState(false)
 
+  const { isAuthenticated } = useAuth0();
 
-
-
+  
  
     const {getAccessTokenSilently } = useAuth0();
     
@@ -208,6 +208,44 @@ function App() {
   }, [])
   
 
+
+  if(!isAuthenticated){
+    return(
+      <div id="all">
+      <span id="top">   
+          <LoginOutButton/>
+          <Profiles/>
+        </span>
+      
+        <div id = "main">
+         <div id = "about">
+          <h1>WGElo - a simple system  for skill tracking.</h1>
+          <h2>What is this? </h2>
+          <br/>
+          WGElo allows you to create players and record their matches. 
+          It provides a player table, to track every players elo rating, 
+          as well as a profile to view indiviudal rating progressions.
+          <br/>
+
+          Log in to create your own Wgelo Table.
+          <br/>
+
+          (image)
+          
+          <br/>
+
+          This project was created for my casual but fiercely competitive friends group.
+          We were trying to find out our relative skill levels for better match making, 
+          and to have a definitive answer on who is the #1. 
+          After a few different iterations, we decided on using the elo system (link).
+          
+          
+          </div>
+        </div>
+      </div>
+
+    )
+  }
 
 
  
