@@ -58,15 +58,19 @@ const deletePerson = (person, persons, setSelectedPerson, getAccessTokenSilently
 const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
     const [selectedPerson, setSelectedPerson] = useState()
     const [page, setPage] =useState(1)
+    const [searchedPlayer, setSearchPlayer] = useState('')
     const {getAccessTokenSilently } = useAuth0();
 
 
-
+    const handleSearchPlayerOnChange =(event) =>{
+      setSearchPlayer(event.target.value)
+    }
 
     persons.sort((a, b) => b.elo.at(-1) - a.elo.at(-1))//sort by higher elo to calculate ranking
     persons.map((person, index) => person.rank = index + 1)// add ranking
     persons.map((person) => person.percentage = person.wins / (person.wins + person.losses))// add ranking
-  
+    persons = persons.filter(person =>person.name.includes(searchedPlayer))//filter does not mutate
+
     if (sortBy === 'elo') {
       //do nothing, since sort has already happened
     }
@@ -81,6 +85,8 @@ const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
       console.log("sort by name")
     }
 
+
+
     let numbers = [];
     for (let i = 1;  i-1 < persons.length/16; i++) {
       numbers.push(<button onClick={() =>{setPage(i)}}>{i}</button>);
@@ -90,6 +96,10 @@ const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
     if(!selectedPerson){
     return (
       <div id ="tableContainer">
+              
+              <div className='inputLabel'>search</div>
+              <input type='text' id="search"  value={searchedPlayer} onChange={handleSearchPlayerOnChange}></input>
+
       <table id='personTable'>
         <thead>
           <tr>

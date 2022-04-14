@@ -18,6 +18,10 @@ body {
 
   }
 
+a{
+    color: magenta;
+}
+
 
 #all{
     display: grid;
@@ -37,10 +41,18 @@ body {
     font-size: 1.2em;
    border-radius: 1em;
    padding: 2em;
-   margin: 2em;
+   margin: 1em;
+   margin-top: 1.5em;
 }
 
-
+#about-nav button{
+    background-color: var(--secondary-color);
+    border-radius: 0.8em;
+    margin: 0.12em;
+    font-size: 1em;
+    font-style: italic;
+    padding: 0.3em;
+}
 
 #navigation .icon{
     filter:sepia(0.8) brightness(0.8) saturate(2)  hue-rotate(250deg);
@@ -132,7 +144,7 @@ body {
     text-align: center;
     border-radius: 1em;
     color: var(--font-color-1);
-    margin-top: 1em;
+    margin-top: 0.5em;
     margin-bottom: 1em;
 }
 
@@ -278,7 +290,31 @@ body {
 
 }
 
-@media only screen and (max-width: 1000px) {
+.inputLabel{
+    color: var(--font-color-1);
+    font-size: 1.2em    ;
+}
+
+#player-choice1{
+    margin-top: 3em;
+    font-size: 1.2em;
+}
+
+
+#player-choice2{
+    margin-top: 1em;
+
+    font-size: 1.2em;
+}
+
+#vs{
+    font-size: 1.9em;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--font-color-1);
+}
+
+@media only screen and (max-width: 1050px) {
  
 
     #main{

@@ -13,7 +13,6 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
     const {getAccessTokenSilently } = useAuth0();
   
     const handlePlayerFormOnChange = (event) => {
-      console.log(event.target.value)
       setPlayerFromContent(event.target.value)
     }
 

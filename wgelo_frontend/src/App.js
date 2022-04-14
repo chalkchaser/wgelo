@@ -8,7 +8,7 @@ import LoginOutButton from './components/LoginOutButton'
 import Profiles from './components/Profile'
 import GamesHistory from './components/GamesHistory'
 import { useAuth0 } from "@auth0/auth0-react";
-
+import About from './components/About';
 
 
 const baseUrl = ''
@@ -87,7 +87,7 @@ const PlayerMatchup = ({players, setPlayers}) => {
    <div>
     <input list="player-data-list" id="player-choice1" name="player 1" value={playerChoiceContent1} onChange={handlePlayerChoiceOnChange1} />
     <DataListPLayerNames players ={players}></DataListPLayerNames>
-    <span> vs </span>
+    <span id="vs"> vs </span>
     <input list="player-data-list" id="player-choice2" name="player 2" value={playerChoiceContent2} onChange={handlePlayerChoiceOnChange2} />
     <DataListPLayerNames players ={players}></DataListPLayerNames>
     <div id= "player-card-container">
@@ -211,38 +211,10 @@ function App() {
 
   if(!isAuthenticated){
     return(
-      <div id="all">
-      <span id="top">   
-          <LoginOutButton/>
-          <Profiles/>
-        </span>
-      
-        <div id = "main">
-         <div id = "about">
-          <h1>WGElo - a simple system  for skill tracking.</h1>
-          <h2>What is this? </h2>
-          <br/>
-          WGElo allows you to create players and record their matches. 
-          It provides a player table, to track every players elo rating, 
-          as well as a profile to view indiviudal rating progressions.
-          <br/>
-
-          Log in to create your own Wgelo Table.
-          <br/>
-
-          (image)
-          
-          <br/>
-
-          This project was created for my casual but fiercely competitive friends group.
-          We were trying to find out our relative skill levels for better match making, 
-          and to have a definitive answer on who is the #1. 
-          After a few different iterations, we decided on using the elo system (link).
-          
-          
-          </div>
-        </div>
+      <div>
+        <About/>
       </div>
+    
 
     )
   }
