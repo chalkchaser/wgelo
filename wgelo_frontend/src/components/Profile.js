@@ -47,7 +47,8 @@ const Profile = () => {
   return (
     (
       <div className="logged-in-text">
-        you are logged in as {user.name}
+        you are logged in
+      
       </div>
      
     )

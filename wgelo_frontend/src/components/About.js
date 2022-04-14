@@ -35,9 +35,9 @@ const Content = ({page}) =>{
           Log in to create your own Wgelo table. You can start right away by creating individual players and recording matches between them. 
  
           <h3>What can I use this app for?</h3>
-          This app was created for my casual but fiercely competitive friends group.
+          This app was created for my casual but fiercely competitive friend group.
           There is a variety of use cases for elo tables, such as tracking fantasy leagues and predicting game outcomes.
-          Our friends group uses this app to track matches and player skill in our semi-casual chess tournaments and other skill related games.
+          Our friend group uses this app to track matches and player skill in our semi-casual chess tournaments and other skill related games.
 
         
           <br/>
