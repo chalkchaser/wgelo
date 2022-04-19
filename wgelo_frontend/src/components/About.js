@@ -63,12 +63,13 @@ const Content = ({page}) =>{
             For more information, you can visit <a href="https://en.wikipedia.org/wiki/Elo_rating_system">Wikipedia</a>
             <br/>
 
-            <h3>What does my rating of x mean?</h3>
-            The higher the score, the better. 
-            A player whose rating is 100 points greater than their opponent's is expected to score 64%
-             If the difference is 200 points, then the expected score for the stronger player is 76%.
-            <h3>Which formula do you use to calculate the elo?</h3>
+            
+            <h3>Which formula do you use to calculate the elo rating?</h3>
             The standard formula is being used, with a starting elo of 1200 and a permanent k-value of 16.
+            <h3>Why can I not log in?</h3>
+            Unfortunately, due to missing features in the authentication platform, 
+            some IOS devices might have trouble logging in, especially IPhones devices (all browsers), or MacBooks using the Safari browser.
+
         </div>
         )  }else if(page === 'tech'){
             return(<div id = "about">
