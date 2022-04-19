@@ -10,6 +10,7 @@ ReactDOM.render(
     redirectUri={window.location.origin}
     audience="https://chalkchaser.eu.auth0.com/api/v2/"
     scope="read:current_user update:current_user_metadata"
+    useRefreshTokens= "true"
   >
     <App />
   </Auth0Provider>,
