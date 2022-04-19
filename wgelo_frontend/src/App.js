@@ -107,7 +107,7 @@ const PlayerCard = ({player}) =>{
   return(
     <div className="player-card">
       <p>{player.name}</p> 
-      <p>{player.elo.at(-1)}</p>
+      <p>{Math.round(player.elo.at(-1))}</p>
       </div>
   )}
   else{return null}

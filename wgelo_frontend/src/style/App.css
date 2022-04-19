@@ -69,6 +69,13 @@ a{
     padding: 0.3em;
 }
 
+
+#about-nav button:hover{
+    background-color: var(--hover-color);
+  
+}
+
+
 #navigation .icon{
     filter:sepia(0.8) brightness(0.8) saturate(2)  hue-rotate(250deg);
 
