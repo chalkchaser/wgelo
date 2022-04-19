@@ -33,7 +33,6 @@ const GamesHistory = () => {
             headers: { "authorization": "Bearer " + accessToken },
           };
         
-        console.log("try to get games")
     
          axios(options)
         .then(response => {
@@ -52,14 +51,14 @@ const GamesHistory = () => {
   
 let numbers = [];
 for (let i = 1;  i-1 < gamesHistory.length/12; i++) {
-  numbers.push(<button onClick={() =>{setPage(i)}}>{i}</button>);
+  numbers.push(<button key={i} onClick={() =>{setPage(i)}}>{i}</button>);
 }
 
 
     return <div>{gamesHistory.reverse().slice((page-1)*12,page*12).map(game =>
     
   
-    <div id="games-history">
+    <div key={game.id} id="games-history">
       <span>{game.player1}</span>
   
       <span>{game.result === 1? ' wins vs ': ' draws vs '}</span>

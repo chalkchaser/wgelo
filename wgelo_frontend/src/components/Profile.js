@@ -12,7 +12,6 @@ const Profile = () => {
     const getUserMetadata = async () => {
       const domain = "chalkchaser.eu.auth0.com";
       try {
-        console.log(domain)
 
         const accessToken = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
@@ -20,7 +19,6 @@ const Profile = () => {
         });
   
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-        console.log(userDetailsByIdUrl)
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {
           headers: {
@@ -32,7 +30,6 @@ const Profile = () => {
         
         setUserMetadata(user_metadata);
       } catch (e) {
-        console.log(e.message);
       }
     };
   

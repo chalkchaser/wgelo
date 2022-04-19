@@ -16,7 +16,6 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
       setPlayerFromContent(event.target.value)
     }
 
-    console.log("test")
   
 
     const addCreatedPlayer  = (e) => {
@@ -55,7 +54,6 @@ const PlayerAddWindow = ({ playerForm, setPlayers, players }) => {
             data: playerObject
           };
         
-        console.log("try to post player")
 
          axios(options)
         .then(response => {

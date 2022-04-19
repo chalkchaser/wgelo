@@ -336,6 +336,24 @@ a{
     color: var(--font-color-1);
 }
 
+#player-return{
+    background-color: var(--secondary-color);
+    border-radius: 1em;
+    padding: 0.3em;
+    font-size: 0.8em;
+}
+
+#player-return:hover{
+    background-color: var(--hover-color);
+}
+
+#player-delete{
+    float:right;
+    font-size: 0.8em;
+    background-color: var(--main-color-1);
+    color: var(--font-color-1)
+}
+
 @media only screen and (max-width: 1050px) {
  
 

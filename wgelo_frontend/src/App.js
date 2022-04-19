@@ -127,7 +127,8 @@ const DataListPLayerNames = ({players}) => {
 
 }
 
-const PlayerAddButton = ({ setPlayerform }) => {
+const PlayerAddButton = ({ setPlayerform,navigate }) => {
+
 
   return (
     <Button text="+player" onClick={(() => setPlayerform(true))} ></Button>
@@ -153,7 +154,18 @@ const MatchConfirmButton = ({setPlayers, players, player1, player2}) =>{
 }
 
 
-
+const Sidebar = ({setPlayerform, playerForm, navigate, players, setPlayers}) =>{
+  if(navigate === "standings")
+  {
+  return(
+  <div id='sideBar'>
+    <PlayerAddButton setPlayerform={setPlayerform} navigate={navigate} />
+    <PlayerAddWindow playerForm={playerForm} players={players} setPlayers = {setPlayers}  navigate={navigate}/> 
+  </div>
+  )}else{
+    return <></>
+  }
+}
 
 
 function App() {
@@ -184,7 +196,6 @@ function App() {
   
           
           )
-          console.log(accessToken)
           
           const options = { 
             method: "GET",
@@ -235,12 +246,8 @@ function App() {
 
         <Display navigate={navigate} players={players} sortBy={sortBy} setSortBy={setSortBy} setPlayers={setPlayers} ></Display>
       </div>
-
-      <div id='sideBar'>
-        <PlayerAddButton setPlayerform={setPlayerform} />
-        <PlayerAddWindow playerForm={playerForm} players={players} setPlayers = {setPlayers}/>
-        
-      </div>
+      <Sidebar setPlayerform={setPlayerform} navigate={navigate} players={players} setPlayers = {setPlayers} playerForm={playerForm}/>
+     
     </div>
 
   );

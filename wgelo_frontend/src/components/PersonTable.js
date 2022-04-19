@@ -7,9 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 
-const deletePerson = (person, persons, setSelectedPerson, getAccessTokenSilently,  setPlayers) => {
-  console.log(person.name + " should be deleted")
-  
+const deletePerson = (person, persons, setSelectedPerson, getAccessTokenSilently,  setPlayers) => {  
 
 
   if(window.confirm('do you really want to delete ' + person.name + "?")){
@@ -77,7 +75,6 @@ const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
   
     if (sortBy === 'name') {
       persons.sort((a, b) => a.name.localeCompare(b.name))
-      console.log("sort by name")
     }
   
     if (sortBy === 'percentage') {
@@ -89,7 +86,7 @@ const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
 
     let numbers = [];
     for (let i = 1;  i-1 < persons.length/16; i++) {
-      numbers.push(<button onClick={() =>{setPage(i)}}>{i}</button>);
+      numbers.push(<button key={i} onClick={() =>{setPage(i)}}>{i}</button>);
     }
 
   
@@ -149,8 +146,8 @@ const PersonTable = ({ persons, sortBy, setSortBy, setPlayers }) => {
       <Line  dataKey="value" stroke="#8884d8" />
       </LineChart>
     </ResponsiveContainer>
-    <button onClick={()=>setSelectedPerson(null)}>return</button>
-    <button onClick={()=>deletePerson(selectedPerson, persons, setSelectedPerson, getAccessTokenSilently, setPlayers)}>delete</button>
+    <button id="player-return" onClick={()=>setSelectedPerson(null)}>return</button>
+    <button id="player-delete" onClick={()=>deletePerson(selectedPerson, persons, setSelectedPerson, getAccessTokenSilently, setPlayers)}>delete</button>
 
     </div>
    

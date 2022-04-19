@@ -27,7 +27,6 @@ const putPlayer = async (player, getAccessTokenSilently) => {
       data: player
     };
   
-  console.log("try to put player")
 
    axios(options)
   .then(response => {
@@ -65,7 +64,6 @@ const postGame = async (game,getAccessTokenSilently) => {
 
    axios(options)
   .then(response => {
-    console.log(response)
 
   })
 
