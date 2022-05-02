@@ -3,7 +3,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-### You can visit the Project on [the official website](https://www.wgelo.com)
+### You can visit the Project on [the official website](https://wgelo.com/)
 
 
 ## About Wgelo
