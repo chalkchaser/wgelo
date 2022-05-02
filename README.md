@@ -25,7 +25,7 @@ WGElo allows you to create players and record their matches. It provides a datab
 
 <!-- GETTING STARTED -->
 
-### Execution
+### Setup
 
 To run the frontend 
 
